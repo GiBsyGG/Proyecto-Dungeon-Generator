@@ -11,7 +11,9 @@ public class TilemapVisualizer : MonoBehaviour
 
      // Este es el tipo de Tile que queremos pintar de los que queremos en el folder precreados
      [SerializeField]
-     private TileBase floorTile, wallTop;
+     private TileBase floorTile, wallTop, wallSideRight, wallSideLeft, wallBottom, wallFull,
+          wallInnerCornerDownLeft, wallInnerCornerDownRight,
+          wallDiagonalCornerDownRight, wallDiagonalCornerDownLeft, wallDiagonalCornerUpRight, wallDiagonalCornerUpLeft;
 
      /// <summary>
      /// Método para pintar el suelo en el Tilemap
@@ -56,16 +58,105 @@ public class TilemapVisualizer : MonoBehaviour
      /// Pintará un Wall único en una posición del Tilemap
      /// </summary>
      /// <param name="position"> Posición en la que se pintará el muro </param>
-     internal void PaintSingleBasicWall(Vector2Int position)
+     /// <param name="binaryType"> Tipo de muro que se va a pintar </param>
+     internal void PaintSingleBasicWall(Vector2Int position, string binaryType)
      {
-          // Llamaremos el método para pintar tiles
-          PaintSingleTile(wallTilemap, wallTop, position);
+          // Convertimos el valor que llega como String a binario (0b000100) por ejemplo
+          int typeAsInt = Convert.ToInt32(binaryType, 2);
+          TileBase tile = null;
+
+          // Comprobamos el tipo de muro que es para usar su correspondiente Tile
+          if (WallTypesHelper.wallTop.Contains(typeAsInt))
+          {
+               tile = wallTop;
+          }
+          else if (WallTypesHelper.wallSideRight.Contains(typeAsInt))
+          {
+               tile = wallSideRight;
+          }
+          else if (WallTypesHelper.wallBottm.Contains(typeAsInt))
+          {
+               tile = wallBottom;
+          }
+          else if (WallTypesHelper.wallSideLeft.Contains(typeAsInt))
+          {
+               tile = wallSideLeft;
+          }
+          else if (WallTypesHelper.wallFull.Contains(typeAsInt))
+          {
+               tile = wallFull;
+          }
+
+
+          if (tile != null)
+          {
+               // Llamaremos el método para pintar tiles si es nulo el tipo
+               PaintSingleTile(wallTilemap, tile, position);
+          }
+
+
+          
      }
 
+
+     /// <summary>
+     /// Método para pintar las esquinas del tilemap
+     /// </summary>
+     /// <param name="position"> Posición de la esquina a pintar </param>
+     /// <param name="BinaryType"> Tipo de muro que se va a pintar </param>
+     internal void PaintSingleCornerWall(Vector2Int position, string BinaryType)
+     {
+          int typeAsInt = Convert.ToInt32(BinaryType, 2);
+          TileBase tile = null;
+
+          // Comprobamos el tipo de esquina que es
+          if (WallTypesHelper.wallInnerCornerDownLeft.Contains(typeAsInt))
+          {
+               tile = wallInnerCornerDownLeft;
+          }
+          else if (WallTypesHelper.wallInnerCornerDownRight.Contains(typeAsInt))
+          {
+               tile = wallInnerCornerDownRight;
+          }
+          else if (WallTypesHelper.wallDiagonalCornerDownLeft.Contains(typeAsInt))
+          {
+               tile = wallDiagonalCornerDownLeft;
+          }
+          else if (WallTypesHelper.wallDiagonalCornerDownRight.Contains(typeAsInt))
+          {
+               tile = wallDiagonalCornerDownRight;
+          }
+          else if (WallTypesHelper.wallDiagonalCornerUpLeft.Contains(typeAsInt))
+          {
+               tile = wallDiagonalCornerUpLeft;
+          }
+          else if (WallTypesHelper.wallDiagonalCornerUpRight.Contains(typeAsInt))
+          {
+               tile = wallDiagonalCornerUpRight;
+          }
+          else if (WallTypesHelper.wallFullEightDirections.Contains(typeAsInt))
+          {
+               tile = wallFull;
+          }
+          else if (WallTypesHelper.wallBottmEightDirections.Contains(typeAsInt))
+          {
+               tile = wallBottom;
+          }
+
+          if (tile != null)
+          {
+               // Si el tipo de tile existe lo pintamos
+               PaintSingleTile(wallTilemap, tile, position);
+          }
+     }
+
+
+     /// <summary>
+     /// Método para limpiar todas las Tiles del mapa
+     /// </summary>
      public void Clear()
      {
           floorTilemap.ClearAllTiles();
           wallTilemap.ClearAllTiles();
      }
-
 }

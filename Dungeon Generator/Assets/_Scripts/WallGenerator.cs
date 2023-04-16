@@ -13,11 +13,69 @@ public static class WallGenerator
      public static void CreateWalls(HashSet<Vector2Int> floorPositions, TilemapVisualizer tilemapVisualizer)
      {
           var basicWallPositions = FindWallsInDirections(floorPositions, Direction2D.cardinalDirectionsList);
+          var cornerWallPositions = FindWallsInDirections(floorPositions, Direction2D.diagonalDirectionsList);
 
           // Pintaremos el muro en cada posicion
+          CreateBasicWall(tilemapVisualizer, basicWallPositions, floorPositions);
+          CreateCornerWalls(tilemapVisualizer, cornerWallPositions, floorPositions);
+     }
+
+
+     /// <summary>
+     /// Método encargado de crear las esquinas y corregir los muros básicos pintados de manera equivocada
+     /// </summary>
+     /// <param name="tilemapVisualizer"> Tilemap donde se pintarán los muros </param>
+     /// <param name="cornerWallPositions"> Posición de la esquina del muro </param>
+     /// <param name="floorPositions"> Posiciones del suelo </param>
+     private static void CreateCornerWalls(TilemapVisualizer tilemapVisualizer, HashSet<Vector2Int> cornerWallPositions, HashSet<Vector2Int> floorPositions)
+     {
+          foreach (var position in cornerWallPositions)
+          {
+               // Ubicamos los vecinos para asignarles el correspondiente valor binario de muro para esta posición
+               // Aquí al ser esquina revisamos las 8 posibles direcciones para saber que tipo de esquina
+               String neighboursBinaryType = "";
+               foreach (var direction in Direction2D.eightDirectionsList)
+               {
+                    var neighboursPosition = position + direction;
+                    if(floorPositions.Contains(neighboursPosition))
+                    {
+                         neighboursBinaryType += "1";
+                    }
+                    else
+                    {
+                         neighboursBinaryType += "0";
+                    }
+               }
+               tilemapVisualizer.PaintSingleCornerWall(position, neighboursBinaryType);
+          }
+     }
+
+
+     /// <summary>
+     /// Método encargado de crear y pintar los muros básicos
+     /// </summary>
+     /// <param name="tilemapVisualizer"> Tilemap donde se pintarán los muros </param>
+     /// <param name="basicWallPositions"> Posición cardinal del del muro </param>
+     /// <param name="floorPositions"> Posiciones del suelo </param>
+     private static void CreateBasicWall(TilemapVisualizer tilemapVisualizer, HashSet<Vector2Int> basicWallPositions, HashSet<Vector2Int> floorPositions)
+     {
           foreach (var position in basicWallPositions)
           {
-               tilemapVisualizer.PaintSingleBasicWall(position);
+               // Ubicamos los vecinos para asignarles el correspondiente valor binario de muro para esta posición
+               String neighboursBinaryType = "";
+               foreach (var direction in Direction2D.cardinalDirectionsList)
+               {
+                    var neighboursPosition = position + direction;
+                    if(floorPositions.Contains(neighboursPosition))
+                    {
+                         neighboursBinaryType += "1";
+                    }
+                    else
+                    {
+                         neighboursBinaryType += "0";
+                    }
+               }
+               tilemapVisualizer.PaintSingleBasicWall(position, neighboursBinaryType);
           }
      }
 
