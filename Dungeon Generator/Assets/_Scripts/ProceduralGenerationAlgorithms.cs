@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public static class ProceduralGenerationAlgorithms
 {
@@ -24,8 +25,8 @@ public static class ProceduralGenerationAlgorithms
                previousPosition = newPosition;
           }
           return path;
-
      }
+
 
      /// <summary>
      /// Hará al RandomWalk seleccionar una sola dirección y en esta dirección caminará a travez de la longitud del corredor 
@@ -48,6 +49,115 @@ public static class ProceduralGenerationAlgorithms
           }
 
           return corridor;
+     }
+
+
+     /// <summary>
+     /// Dividirá un espacio en las diferentes rooms de manera aleatoria
+     /// </summary>
+     /// <param name="spaceToSplit"> Espacio que se dividirá en rooms </param>
+     /// <param name="minWidth"> anchura minima del room </param>
+     /// <param name="minHeight"> altura minima del room </param>
+     /// <returns> Una List con las rooms resultantes de la división </returns>
+     public static List<BoundsInt> BinarySpacePartitioning(BoundsInt spaceToSplit, int minWidth, int minHeight)
+     {
+          // Room que podremos tomar y si es posible dividir
+          Queue<BoundsInt> roomsQueue = new Queue<BoundsInt>();
+
+          // Rooms resultantes de la división
+          List<BoundsInt> roomsList = new List<BoundsInt>();
+
+          // Ponemos primero en cola el espacio a dividir
+          roomsQueue.Enqueue(spaceToSplit);
+
+          // Mientras tengamos salas para dividir trataremos de hacerlo
+          while (roomsQueue.Count > 0)
+          {
+               // Obtenemos las room para dividir
+               var room = roomsQueue.Dequeue();
+
+               // Descartamos rooms que son muy pequeñas para el room generation
+               if(room.size.y >= minHeight && room.size.x >= minWidth)
+               {
+                    // De manera random decidimos si se divide vertical u horizontal
+                    if(Random.value < 0.5f)
+                    {
+                         // Miramos si se puede dividir horizontalmente en dos rooms
+                         if(room.size.y >= minHeight * 2)
+                         {
+                              SplitHorizontally(minHeight, roomsQueue, room);
+                         } else if(room.size.x >= minWidth * 2)
+                         {
+                              SplitVertically(minWidth, roomsQueue, room);
+                         } else if(room.size.x >= minWidth && room.size.y >= minHeight)
+                         {
+                              // El area no puede ser dividia pero puede contener un room, por tanto lo añadimos a la lista pero no a la cola
+                              roomsList.Add(room);
+                         }
+                    }
+                    else
+                    {
+                         // Miramos si se puede dividir verticalmente en dos rooms
+                         if (room.size.x >= minWidth * 2)
+                         {
+                              SplitVertically(minWidth, roomsQueue, room);
+                         } else if (room.size.y >= minHeight * 2)
+                         {
+                              SplitHorizontally(minHeight, roomsQueue, room);
+                         }
+                         else if (room.size.x >= minWidth && room.size.y >= minHeight)
+                         {
+                              // El area no puede ser dividia pero puede contener un room, por tanto lo añadimos a la lista pero no a la cola
+                              roomsList.Add(room);
+                         }
+                    }
+               }
+          }
+
+          return roomsList;
+     }
+
+
+     /// <summary>
+     /// Método para hacer divisiones de un espacio o room horizontalmente de manera aleatoria
+     /// </summary>
+     /// <param name="minHeight"></param>
+     /// <param name="roomsQueue"> Cola de las rooms que se verifican para dividir </param>
+     /// <param name="room"> Room que se dividirá en dos rooms </param>
+     private static void SplitHorizontally(int minHeight, Queue<BoundsInt> roomsQueue, BoundsInt room)
+     {
+          // Lógica similar al split vertical 
+          var ySplit = Random.Range(1, room.size.y);
+          BoundsInt room1 = new BoundsInt(room.min, new Vector3Int(room.size.x, ySplit, room.size.z));
+          BoundsInt room2 = new BoundsInt(new Vector3Int(room.min.x, room.min.y + ySplit, room.min.z),
+               new Vector3Int(room.size.x, room.size.y - ySplit, room.size.z));
+
+          roomsQueue.Enqueue(room1);
+          roomsQueue.Enqueue(room2);
+
+     }
+
+
+     /// <summary>
+     /// Método para hacer divisiones de un espacio o room verticalmente de manera aleatoria
+     /// </summary>
+     /// <param name="minWidth"></param>
+     /// <param name="roomsQueue"> Cola de las rooms que se verifican para dividir </param>
+     /// <param name="room"> Room que se dividirá en dos rooms </param>
+     private static void SplitVertically(int minWidth, Queue<BoundsInt> roomsQueue, BoundsInt room)
+     {
+          // El size.x no toma el borde final
+          var xSplit = Random.Range(1, room.size.x);  // Podemos usar el minHeight para ajustar dos rooms en una division pero queremos usar el factor random
+
+          // Counstrimos nuestras cajas room 1 y room2 pasando la posición inicial y luego el tamaño
+          BoundsInt room1 = new BoundsInt(room.min, new Vector3Int(xSplit, room.size.y, room.size.z));
+
+          BoundsInt room2 = new BoundsInt(new Vector3Int(room.min.x + xSplit, room.min.y, room.min.z),
+               new Vector3Int(room.size.x - xSplit, room.size.y, room.size.z));
+
+          // Ahora que encontramos en sala las ponemos en la cola para ver si pueden ser divididas
+          roomsQueue.Enqueue(room1);
+          roomsQueue.Enqueue(room2);
      }
 }
 

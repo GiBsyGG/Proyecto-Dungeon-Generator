@@ -222,6 +222,7 @@ public class CorridorFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
                     newCorridor.Add(corridor[i - 1]);
                     // Esta es la Tile que se pinta a la derecha de la actual Tile
                     newCorridor.Add(corridor[i - 1] + newCorridorTileOffSet);
+                    previewsDirection = directionFromCell;
                }
           }
 
