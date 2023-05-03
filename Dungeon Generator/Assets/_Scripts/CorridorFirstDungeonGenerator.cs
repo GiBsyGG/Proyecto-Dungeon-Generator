@@ -2,10 +2,18 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using UnityEngine;
-
+using Rnd = System.Random;
 public class CorridorFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
 {
+     // Parametros para seed
+     [SerializeField]
+     private bool useCorridorsSeed = false;
+     [SerializeField]
+     private int corridorsSeed;
+
+     // PCG parameters
      [SerializeField]
      private int corridorLenght = 14, corridorCount = 5;
 
@@ -14,6 +22,19 @@ public class CorridorFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
      [SerializeField]
      [Range(0.1f,1)]
      private float roomPercent = 0.8f;
+
+ 
+
+
+     // PCG Data
+     private Dictionary<Vector2Int, HashSet<Vector2Int>> roomsDictionary = new Dictionary<Vector2Int, HashSet<Vector2Int>>();
+
+     private HashSet<Vector2Int> floorPositions, corridorPositions;
+
+     // Gizmos Data
+     private List<Color> roomColors = new List<Color>();
+     [SerializeField]
+     private bool showRoomGizmo = false, showCorridorsGizmo;
 
 
      protected override void RunProceduralGeneration()
@@ -143,12 +164,28 @@ public class CorridorFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
                // Generaremos las posiciones del suelo del room con los parametros heredados para la room y la posición potencial para la room
                var roomFloor = RunRandomWalk(randomWalkParameters, roomPosition);
 
+               // Guardamos los datos del room
+               SaveRoomData(roomPosition, roomFloor);
+
                // Añadimos las posiciones a las posiciones de todas las rooms
                roomPositions.UnionWith(roomFloor);
           }
 
           return roomPositions;
 
+     }
+
+     
+     /// <summary>
+     /// Guarda los datos de una room en el diccionario de roomsDictionary
+     /// </summary>
+     /// <param name="roomPosition"> Posición central de la room </param>
+     /// <param name="roomFloor"> Suelo que conforma la room </param>
+     private void SaveRoomData(Vector2Int roomPosition, HashSet<Vector2Int> roomFloor)
+     {
+          roomsDictionary[roomPosition] = roomFloor;
+          // Generamos un nuevo color de Room
+          roomColors.Add(UnityEngine.Random.ColorHSV());
      }
 
 
@@ -163,23 +200,41 @@ public class CorridorFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
           var currentPosition = startPosition;
           potentialRoomPositions.Add(currentPosition);
           List<List<Vector2Int>> corridors = new List<List<Vector2Int>>();
+          Rnd rnd = new Rnd(corridorsSeed);
 
           for (int i = 0; i < corridorCount; i++)
           {
-               var corridor = ProceduralGenerationAlgorithms.RandomWalkCorridor(currentPosition, corridorLenght);
+               if (useCorridorsSeed)
+               {
+                    var corridor = ProceduralGenerationAlgorithms.RandomWalkCorridor(currentPosition, corridorLenght, rnd);
+                    corridors.Add(corridor);
 
-               corridors.Add(corridor);
+                    // Pasamos la última posición como actual para generar el siguente corredor asegurandonos que los corredores estén conectados
+                    currentPosition = corridor[corridor.Count - 1];
 
-               // Pasamos la última posición como actual para generar el siguente corredor asegurandonos que los corredores estén conectados
-               currentPosition = corridor[corridor.Count - 1];
+                    // pasamos las currentPosition a las ubicaciones de salas potenciales
+                    potentialRoomPositions.Add(currentPosition);
 
-               // pasamos las currentPosition a las ubicaciones de salas potenciales
-               potentialRoomPositions.Add(currentPosition);
+                    // Unimos esas posiciones del corredor con las posiciones que tenemos de suelo, así el corredor también quedará en el path
+                    floorPositions.UnionWith(corridor);
+               } else
+               {
+                    var corridor = ProceduralGenerationAlgorithms.RandomWalkCorridor(currentPosition, corridorLenght);
+                    corridors.Add(corridor);
 
-               // Unimos esas posiciones del corredor con las posiciones que tenemos de suelo, así el corredor también quedará en el path
-               floorPositions.UnionWith(corridor);
+                    // Pasamos la última posición como actual para generar el siguente corredor asegurandonos que los corredores estén conectados
+                    currentPosition = corridor[corridor.Count - 1];
+
+                    // pasamos las currentPosition a las ubicaciones de salas potenciales
+                    potentialRoomPositions.Add(currentPosition);
+
+                    // Unimos esas posiciones del corredor con las posiciones que tenemos de suelo, así el corredor también quedará en el path
+                    floorPositions.UnionWith(corridor);
+               }
+
+
           }
-
+          corridorPositions = new HashSet<Vector2Int>(floorPositions);
           return corridors;
      }
 

@@ -3,9 +3,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
+using Rnd = System.Random;
 
 public class RoomFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
 {
+     // Si se usa la semilla
+     [SerializeField]
+     private bool usePartitionSeed = false;
+     [SerializeField]
+     private int partitionSeed = 0;
+
      [SerializeField]
      private int minRoomWidth = 4, minRoomHeight = 4;
 
@@ -37,6 +44,12 @@ public class RoomFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
           var roomsList = ProceduralGenerationAlgorithms.BinarySpacePartitioning(new BoundsInt((Vector3Int)startPosition,
                new Vector3Int(dungeonWidth, dungeonHeight, 0)), minRoomWidth, minRoomHeight);
 
+          if (usePartitionSeed)
+          {
+               // Esto crea nuestra Bounding Boxes con el espacio para las rooms
+               roomsList = ProceduralGenerationAlgorithms.BinarySpacePartitioning(new BoundsInt((Vector3Int)startPosition,
+                    new Vector3Int(dungeonWidth, dungeonHeight, 0)), minRoomWidth, minRoomHeight, partitionSeed);
+          }
           HashSet<Vector2Int> floor = new HashSet<Vector2Int>();
 
           // Si el reandomWalkRooms está activo creamos las rooms usando el random walk, si no, serán las rooms rectangulares
@@ -79,6 +92,13 @@ public class RoomFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
           HashSet<Vector2Int> corridors = new HashSet<Vector2Int>();
           // Elejimos un punto random para iniciar los corredores
           var currentRoomCenter = roomCenters[Random.Range(0, roomCenters.Count)];
+          if (usePartitionSeed)
+          {
+               // Elejimos un punto random para iniciar los corredores
+               Rnd rnd = new Rnd(partitionSeed);
+               currentRoomCenter = roomCenters[rnd.Next(0, roomCenters.Count)];
+          }
+
           // Removemos al actual de la lista para que no se generen repeticiones en los corredores
           roomCenters.Remove(currentRoomCenter);
 
