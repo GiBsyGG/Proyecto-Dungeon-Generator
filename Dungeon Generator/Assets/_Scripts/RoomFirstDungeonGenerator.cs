@@ -228,26 +228,4 @@ public class RoomFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
           return floor;
      }
 
-          /// <summary>
-     /// Método para ampliar el corredor cambiando cada posición a un espacio 3x3
-     /// </summary>
-     /// <param name="corridor"> corredor que será ampliado </param>
-     /// <returns> Lista con las posiciones del nuevo corredor ampliado </returns>
-     private List<Vector2Int> IncreaseCorridorBrush3By3(List<Vector2Int> corridor)
-     {
-          List<Vector2Int> newCorridor = new List<Vector2Int>();
-
-          // Añadiremos un offset de celdas 3x3, no solo en las esquinaso
-          for (int i = 1; i < corridor.Count; i++)
-          {
-               for (int x = -1; x < 2; x++)
-               {
-                    for (int y = -1; y < 2; y++)
-                    {
-                         newCorridor.Add(corridor[i - 1] + new Vector2Int(x, y));
-                    }
-               }
-          }
-          return newCorridor;
-     }
 }
