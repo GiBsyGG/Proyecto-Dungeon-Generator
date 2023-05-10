@@ -1,18 +1,95 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-     public float speed = 10f;
+     [SerializeField]
+     private float speed = 10f;
 
+     private Rigidbody2D _rb;
+     private Camera _cam;
+
+     // Cuerpo del player
+     [Space(20)]
+     [SerializeField]
+     private Transform _body;
+
+     // Componente animator del Body
+     private Animator _bodyAnimator;
+
+     // Arma del player
+     [Space(20)]
+     [SerializeField]
+     private Transform _weapon;
+     [SerializeField]
+     private SpriteRenderer _weaponRender;
+
+     private void Start()
+     {
+          _rb = GetComponent<Rigidbody2D>();
+          _cam = Camera.main;
+          _bodyAnimator = _body.GetComponent<Animator>();
+     }
      private void Update()
      {
+          MovePlayer();
+          RotateWeapon();
+     }
+
+     private void MovePlayer()
+     {
+          // Movimiento del Body
           float horizontal = Input.GetAxisRaw("Horizontal");
           float vertical = Input.GetAxisRaw("Vertical");
 
-          Vector3 direction = new Vector3(horizontal, vertical, 0f).normalized;
+          Vector2 _dir = new Vector2(horizontal, vertical);
+          _dir.Normalize();
+          _rb.velocity = _dir * speed;
 
-          transform.position += direction * speed * Time.deltaTime;
+          // Cambiar el estado de movimiento para el animator si se mueve
+          if (_dir.x != 0 || _dir.y != 0) {
+               _bodyAnimator.SetBool("isMoving", true);
+          } else
+          {
+               _bodyAnimator.SetBool("isMoving", false);
+          }
+
+          // Rotar el personaje según la dirección en la que vaya
+          if (horizontal == -1)
+          {
+               transform.rotation = Quaternion.Euler(0, 180, 0);
+          }
+          else if (horizontal == 1)
+          {
+               transform.rotation = Quaternion.Euler(0, 0, 0);
+          }
      }
+
+     private void RotateWeapon()
+     {
+          // Posicion del mouse 
+          Vector2 mousePos = Input.mousePosition;
+          Vector3 mouseWorldPos = _cam.ScreenToWorldPoint(mousePos);
+          mouseWorldPos.z = 0;
+
+          // Rotacion del arma
+          Vector3 aimVector = (mouseWorldPos - transform.position).normalized;
+          float angle = Mathf.Atan2(aimVector.y, aimVector.x) * Mathf.Rad2Deg;
+
+          _weapon.rotation = Quaternion.Euler(0, 0, angle);
+
+          // Si la rotacíon va hacia atras del personaje invierte el Sprite del arma
+          if (_weapon.rotation.z < -0.5 || _weapon.rotation.z > 0.5)
+          {
+               _weaponRender.flipY = true;
+          }
+          else
+          {
+               _weaponRender.flipY = false;
+          }
+     }
+
 }
