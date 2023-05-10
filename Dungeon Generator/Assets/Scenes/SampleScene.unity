@@ -28869,7 +28869,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e614f5455b5e0e41a17529b83c72b74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
+  speed: 5
   _body: {fileID: 367367464}
   _weapon: {fileID: 773960989}
   _weaponRender: {fileID: 773960990}
@@ -28925,7 +28925,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1.5, y: 2}
+  m_Size: {x: 0.5, y: 1}
   m_Direction: 0
 --- !u!1 &1387524084
 GameObject:
