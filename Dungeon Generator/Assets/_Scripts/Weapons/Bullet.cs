@@ -7,8 +7,14 @@ public class Bullet : MonoBehaviour
 {
     [SerializeField]
     private float _speed = 7;
+    
+    [Space(20)] 
+	[SerializeField]
+    private GameObject _hitVFXPrefab;
+
     [SerializeField]
     private float _lifeTime = 3;
+
     [SerializeField]
     private LayerMask _collisionMask;
     
@@ -47,6 +53,17 @@ public class Bullet : MonoBehaviour
         if (hit.collider != null)
         {
             Debug.Log("Hit with " + hit.collider.name);
+
+            if (hit.transform.TryGetComponent(out IDamageable targetHit))
+            {
+                targetHit.TakeHit();
+            }
+
+            if (_hitVFXPrefab)
+            {
+                Instantiate(_hitVFXPrefab, _rb.position, Quaternion.identity);
+            }
+
             DestroyProjectile();
         }
     }

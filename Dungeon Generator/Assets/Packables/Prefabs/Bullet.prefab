@@ -179,6 +179,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 7
+  _hitVFXPrefab: {fileID: 8689123202257706389, guid: dc41dc91261787f43911163861b1019a, type: 3}
+  _lifeTime: 3
   _collisionMask:
     serializedVersion: 2
     m_Bits: 1281
