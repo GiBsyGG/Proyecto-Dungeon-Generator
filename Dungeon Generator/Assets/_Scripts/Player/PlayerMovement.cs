@@ -27,6 +27,11 @@ public class PlayerMovement : MonoBehaviour
      [SerializeField]
      private SpriteRenderer _weaponRender;
 
+     // Arma melee del player
+     [Space(20)]
+     [SerializeField]
+     private Transform _meleePoint;
+
      private void Start()
      {
           _rb = GetComponent<Rigidbody2D>();
@@ -37,6 +42,7 @@ public class PlayerMovement : MonoBehaviour
      {
           MovePlayer();
           RotateWeapon();
+          RotateMeleePoint();
      }
 
      private void MovePlayer()
@@ -90,6 +96,23 @@ public class PlayerMovement : MonoBehaviour
           {
                _weaponRender.flipY = false;
           }
+     }
+
+     private void RotateMeleePoint()
+     {
+          // Posicion del mouse 
+          Vector2 mousePos = Input.mousePosition;
+          Vector3 mouseWorldPos = _cam.ScreenToWorldPoint(mousePos);
+          mouseWorldPos.z = 0;
+
+          // Rotacion del arma
+          Vector3 aimVector = (mouseWorldPos - transform.position).normalized;
+          float angle = Mathf.Atan2(aimVector.y, aimVector.x) * Mathf.Rad2Deg;
+
+          _meleePoint.rotation = Quaternion.Euler(0, 0, angle);
+
+          // Acercamiento del arma a la direccion del mouse
+          _meleePoint.position = transform.position - (new Vector3(0f, 0.2f, 0f)) + aimVector * 0.2f;
      }
 
 }
