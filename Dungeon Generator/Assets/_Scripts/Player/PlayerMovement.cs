@@ -62,16 +62,6 @@ public class PlayerMovement : MonoBehaviour
           {
                _bodyAnimator.SetBool("isMoving", false);
           }
-
-          // Rotar el personaje según la dirección en la que vaya
-          if (horizontal == -1)
-          {
-               transform.rotation = Quaternion.Euler(0, 180, 0);
-          }
-          else if (horizontal == 1)
-          {
-               transform.rotation = Quaternion.Euler(0, 0, 0);
-          }
      }
 
      private void RotateWeapon()
@@ -87,14 +77,16 @@ public class PlayerMovement : MonoBehaviour
 
           _weapon.rotation = Quaternion.Euler(0, 0, angle);
 
-          // Si la rotacíon va hacia atras del personaje invierte el Sprite del arma
+          // Si la rotacíon va hacia atras del personaje invierte el Sprite del arma y el personaje
           if (_weapon.rotation.z < -0.5 || _weapon.rotation.z > 0.5)
           {
                _weaponRender.flipY = true;
+               transform.rotation = Quaternion.Euler(0, 180, 0);
           }
           else
           {
                _weaponRender.flipY = false;
+               transform.rotation = Quaternion.Euler(0, 0, 0);
           }
      }
 
