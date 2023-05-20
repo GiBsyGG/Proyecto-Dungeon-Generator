@@ -72,6 +72,9 @@ public class RoomFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
                roomCenters.Add(((Vector2Int)Vector3Int.RoundToInt(room.center)));
           }
 
+          // Guardamos la posición central de la primer Room para posicionar el player
+          Vector2Int initialRoom = roomCenters[0];
+
           HashSet<Vector2Int> corridors = ConnectRooms(roomCenters);
           // Unimos los corredores creados al suelo para pintarlos luego
           floor.UnionWith(corridors);
@@ -79,6 +82,9 @@ public class RoomFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
           // Luego de crear el suelo, lo pintamos y ponemos sus respectivos muros
           tilemapVisualizer.PaintFloorTiles(floor);
           WallGenerator.CreateWalls(floor, tilemapVisualizer);
+
+          // Posicionamos el player
+          PlayerGeneration.GeneratePlayer(initialRoom);
      }
 
 

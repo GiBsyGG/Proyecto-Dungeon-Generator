@@ -11,9 +11,12 @@ public class TilemapVisualizer : MonoBehaviour
 
      // Este es el tipo de Tile que queremos pintar de los que queremos en el folder precreados
      [SerializeField]
-     private TileBase floorTile, wallTop, wallSideRight, wallSideLeft, wallBottom, wallFull,
+     private TileBase floorTile_0, floorTile_1, floorTile_2, floorTile_3,
+          wallTop, wallSideRight, wallSideLeft, wallBottom, wallFull,
           wallInnerCornerDownLeft, wallInnerCornerDownRight,
           wallDiagonalCornerDownRight, wallDiagonalCornerDownLeft, wallDiagonalCornerUpRight, wallDiagonalCornerUpLeft;
+
+     private List<TileBase> listaFloors;
 
      /// <summary>
      /// Método para pintar el suelo en el Tilemap
@@ -21,9 +24,33 @@ public class TilemapVisualizer : MonoBehaviour
      /// <param name="floorPositions"></param>
      public void PaintFloorTiles(IEnumerable<Vector2Int> floorPositions)
      {
-          PaintTiles(floorPositions, floorTilemap, floorTile);
+          listaFloors = new List<TileBase>();
+          // Añadir los diferentes pisos para seleccionar uno al azar
+          listaFloors.Add(floorTile_0);
+          listaFloors.Add(floorTile_1);
+          listaFloors.Add(floorTile_2);
+          listaFloors.Add(floorTile_3);
+
+          PaintTiles(floorPositions, floorTilemap, listaFloors);
      }
 
+
+     /// <summary>
+     /// Método para pintar el tilemap según las posiciones indicadas
+     /// </summary>
+     /// <param name="positions"> Posiciones que se usarán </param>
+     /// <param name="Tilemap"> Tilemap en el que pintaremos </param>
+     /// <param name="Tiles"> lista de Posibles tiles a pintar </param>
+     /// <exception cref="NotImplementedException"></exception>
+     private void PaintTiles(IEnumerable<Vector2Int> positions, Tilemap tilemap, List<TileBase> tiles)
+     {
+
+          foreach (var position in positions)
+          {
+               TileBase tile = tiles[UnityEngine.Random.Range(0, 4)];
+               PaintSingleTile(tilemap, tile, position);
+          }
+     }
 
      /// <summary>
      /// Método para pintar el tilemap según las posiciones indicadas
