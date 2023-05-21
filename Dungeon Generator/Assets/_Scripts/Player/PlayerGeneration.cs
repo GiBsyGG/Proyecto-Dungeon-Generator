@@ -14,5 +14,4 @@ public static class PlayerGeneration
                playerObject.transform.position = new Vector3(initialPosition.x, initialPosition.y, 0);
           }
      }
-
 }

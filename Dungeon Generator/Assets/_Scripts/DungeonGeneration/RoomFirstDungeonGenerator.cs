@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 using Rnd = System.Random;
@@ -75,6 +76,9 @@ public class RoomFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
           // Guardamos la posición central de la primer Room para posicionar el player
           Vector2Int initialRoom = roomCenters[0];
 
+          // Posición más lejana al inicial para colocar la puerta
+          Vector2Int lastRoom = FindFartherPointTo(initialRoom, roomCenters);
+
           HashSet<Vector2Int> corridors = ConnectRooms(roomCenters);
           // Unimos los corredores creados al suelo para pintarlos luego
           floor.UnionWith(corridors);
@@ -83,8 +87,14 @@ public class RoomFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
           tilemapVisualizer.PaintFloorTiles(floor);
           WallGenerator.CreateWalls(floor, tilemapVisualizer);
 
+          // Pintamos la decoración de las esquinas
+          CornerDecorationGenerator.CreateCornerDecoration(floor, tilemapVisualizer);
+
           // Posicionamos el player
           PlayerGeneration.GeneratePlayer(initialRoom);
+
+          //Posicionamos la Salida
+          ExitGeneration.GenerateExit(lastRoom);
      }
 
 
@@ -183,6 +193,31 @@ public class RoomFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
           }
           return closest;
      }
+
+
+     /// <summary>
+     /// Método para encontrar el centro con la distancia mas lejana
+     /// </summary>
+     /// <param name="currentRoomCenter"> Posicion del centro actual </param>
+     /// <param name="roomCenters"> Lista de centros para comparar </param>
+     /// <returns> Posicion del centro mas Lejano </returns>
+     private Vector2Int FindFartherPointTo(Vector2Int currentRoomCenter, List<Vector2Int> roomCenters)
+     {
+          Vector2Int closest = Vector2Int.zero;
+          float distance = 0;
+          foreach (var position in roomCenters)
+          {
+               float currentDistance = Vector2.Distance(position, currentRoomCenter);
+               if (currentDistance > distance)
+               {
+                    distance = currentDistance;
+                    closest = position;
+               }
+          }
+          return closest;
+     }
+
+
 
 
      /// <summary>

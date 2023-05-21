@@ -7,7 +7,7 @@ using UnityEngine.Tilemaps;
 public class TilemapVisualizer : MonoBehaviour
 {
      [SerializeField]
-     private Tilemap floorTilemap, wallTilemap;
+     private Tilemap floorTilemap, wallTilemap, cornerDecoTilemap;
 
      // Este es el tipo de Tile que queremos pintar de los que queremos en el folder precreados
      [SerializeField]
@@ -15,6 +15,9 @@ public class TilemapVisualizer : MonoBehaviour
           wallTop, wallSideRight, wallSideLeft, wallBottom, wallFull,
           wallInnerCornerDownLeft, wallInnerCornerDownRight,
           wallDiagonalCornerDownRight, wallDiagonalCornerDownLeft, wallDiagonalCornerUpRight, wallDiagonalCornerUpLeft;
+
+     [SerializeField]
+     private TileBase tileLargeCandle, tileShortCandle, tileNoCandle, tileTorch, tileSpiderWeb, bones1, bones2;
 
      private List<TileBase> listaFloors;
 
@@ -179,11 +182,80 @@ public class TilemapVisualizer : MonoBehaviour
 
 
      /// <summary>
-     /// Método para limpiar todas las Tiles del mapa
+     /// Método para pintar las esquinas del tilemap
      /// </summary>
-     public void Clear()
+     /// <param name="position"> Posición de la esquina a pintar </param>
+     /// <param name="BinaryType"> Tipo de muro que se va a pintar </param>
+     internal void PaintSingleCornerDecoration(Vector2Int position, string BinaryType)
+     {
+          int typeAsInt = Convert.ToInt32(BinaryType, 2);
+          TileBase tile = null;
+
+          // Lista de decoraciones por esquina
+          List<TileBase> cornerTilesLU = new List<TileBase>();
+          List<TileBase> cornerTilesRU = new List<TileBase>();
+          List<TileBase> cornerTilesRD = new List<TileBase>();
+          List<TileBase> cornerTilesLD = new List<TileBase>();
+          cornerTilesLU.Add(tileTorch);
+          cornerTilesLU.Add(bones2);
+          cornerTilesLU.Add(tileNoCandle);
+          cornerTilesRU.Add(tileNoCandle);
+          cornerTilesRU.Add(bones1);
+          cornerTilesRU.Add(tileLargeCandle);
+          cornerTilesRU.Add(tileShortCandle);
+          cornerTilesLD.Add(tileSpiderWeb);
+          cornerTilesRD.Add(bones1);
+          cornerTilesRD.Add(bones2);
+
+
+
+          // Comprobamos el tipo de esquina que es
+
+          if (WallTypesHelper.wallDiagonalCornerUpLeft.Contains(typeAsInt))
+          {
+               tile = cornerTilesLU[UnityEngine.Random.Range(0,3)];
+               Vector2Int offset = Direction2D.diagonalDirectionsList[1];
+               position += offset;
+          }
+          else if (WallTypesHelper.wallDiagonalCornerUpRight.Contains(typeAsInt))
+          {
+               tile = cornerTilesRU[UnityEngine.Random.Range(0,4)];
+               Vector2Int offset = Direction2D.diagonalDirectionsList[2];
+               position += offset;
+          }
+          else if (WallTypesHelper.wallDiagonalCornerDownLeft.Contains(typeAsInt))
+          {
+               tile = cornerTilesLD[0];
+               Vector2Int offset = Direction2D.diagonalDirectionsList[0];
+               position += offset;
+          }
+          else if (WallTypesHelper.wallDiagonalCornerDownRight.Contains(typeAsInt))
+          {
+               tile = cornerTilesRD[UnityEngine.Random.Range(0, 2)];
+               Vector2Int offset = Direction2D.diagonalDirectionsList[3];
+               position += offset;
+          }
+
+          // No siempre decoraremos la esquina
+          if (UnityEngine.Random.Range(0,2) == 1)
+          {
+               tile = null;
+          }
+
+          if (tile != null)
+          {
+               // Si el tipo de tile existe lo pintamos
+               PaintSingleTile(cornerDecoTilemap, tile, position);
+          }
+
+     }
+          /// <summary>
+          /// Método para limpiar todas las Tiles del mapa
+          /// </summary>
+          public void Clear()
      {
           floorTilemap.ClearAllTiles();
           wallTilemap.ClearAllTiles();
+          cornerDecoTilemap.ClearAllTiles();
      }
 }
