@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor;
 using UnityEngine;
 using Random = UnityEngine.Random;
 using Rnd = System.Random;
@@ -30,9 +31,19 @@ public class RoomFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
      [SerializeField]
      private bool ramdomWalkRooms = false;
 
+     // Enemigos que pondremos en el mapa
+     [SerializeField]
+     private GameObject enemy;
+
+     // Lista de instancia de enemigos para destruirlos luegos
+     List<GameObject> enemies = new List<GameObject>();
 
      protected override void RunProceduralGeneration()
      {
+          // Limpieza
+          // Limpiar Room de posibles enemigos antes de generar nuevos
+          InstancesDestroyer.DestroyInstances();
+
           CreateRooms();
      }
 
@@ -51,19 +62,69 @@ public class RoomFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
                roomsList = ProceduralGenerationAlgorithms.BinarySpacePartitioning(new BoundsInt((Vector3Int)startPosition,
                     new Vector3Int(dungeonWidth, dungeonHeight, 0)), minRoomWidth, minRoomHeight, partitionSeed);
           }
+
           HashSet<Vector2Int> floor = new HashSet<Vector2Int>();
+
+          // Lista de todas las salas con su tipo
+          List<object[]> rooms = new List<object[]>();
+
+          // Lista de las posiciones de cada tipo de sala
+          HashSet<Vector2Int> combatRoom = new HashSet<Vector2Int>();
+          HashSet<Vector2Int> initialRoom = new HashSet<Vector2Int>();
+          HashSet<Vector2Int> finalRoom = new HashSet<Vector2Int>();
 
           // Si el reandomWalkRooms está activo creamos las rooms usando el random walk, si no, serán las rooms rectangulares
           if (ramdomWalkRooms)
           {
-               floor = CreateRoomsRandomly(roomsList);
+               rooms = CreateRoomsRandomly(roomsList);
           }
           else
           {
-               floor = CreateSimpleRooms(roomsList);
+               rooms = CreateSimpleRooms(roomsList);
           }
 
+          // Union de las salas de cada room hayada
+          foreach (object[] room in rooms)
+          {
+               HashSet<Vector2Int> roomFloor = (HashSet<Vector2Int>)room[0];
+               floor.UnionWith(roomFloor);
+               BoundsInt roomBound = (BoundsInt)room[1];
+               Vector2Int roomCenter = (Vector2Int)Vector3Int.RoundToInt(roomBound.center);
 
+
+               switch ((string)room[2])
+               {
+                    case "initialRoom":
+                         
+
+                         // Posicionamos el player en el centro de la room inicial
+                         PlayerGeneration.GeneratePlayer(roomCenter);
+
+                         // Posiciones del suelo de la room inicial
+                         initialRoom.UnionWith(roomFloor);
+                         break;
+
+                    case "finalRoom":
+
+                         //Posicionamos la Salida en el centro de la room mas lejana a la inicial
+                         ExitGeneration.GenerateExit(roomCenter);
+
+                         // Posiciones del suelo de la room final
+                         finalRoom.UnionWith(roomFloor);
+                         break;
+
+                    case "combatRoom":
+
+                         // Usamos el room floor para colocar los enemigos cercano al centro
+                         enemies = EnemyGenerator.GenerateEnemys(roomFloor, roomCenter, enemy);
+
+                         break;
+
+               }
+
+               // Se decoran las esquinas de las salas
+               CornerDecorationGenerator.CreateCornerDecoration(roomFloor, tilemapVisualizer);
+          }
 
           // Lista de los puntos centrales para conectar los corredores
           List<Vector2Int> roomCenters = new List<Vector2Int>();
@@ -73,12 +134,6 @@ public class RoomFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
                roomCenters.Add(((Vector2Int)Vector3Int.RoundToInt(room.center)));
           }
 
-          // Guardamos la posición central de la primer Room para posicionar el player
-          Vector2Int initialRoom = roomCenters[0];
-
-          // Posición más lejana al inicial para colocar la puerta
-          Vector2Int lastRoom = FindFartherPointTo(initialRoom, roomCenters);
-
           HashSet<Vector2Int> corridors = ConnectRooms(roomCenters);
           
           // Unimos los corredores creados al suelo para pintarlos luego
@@ -86,20 +141,7 @@ public class RoomFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
 
           // Luego de crear el suelo, lo pintamos y ponemos sus respectivos muros
           tilemapVisualizer.PaintFloorTiles(floor);
-          
           WallGenerator.CreateWalls(floor, tilemapVisualizer);
-
-          // Guardamos la posición del suelo de las rooms, para decorar y posicionar enemigos
-          HashSet<Vector2Int> roomsFloor = floor;
-          roomsFloor.ExceptWith(corridors);
-
-          CornerDecorationGenerator.CreateCornerDecoration(roomsFloor, tilemapVisualizer);
-
-          // Posicionamos el player
-          PlayerGeneration.GeneratePlayer(initialRoom);
-
-          //Posicionamos la Salida
-          ExitGeneration.GenerateExit(lastRoom);
      }
 
 
@@ -229,12 +271,24 @@ public class RoomFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
      /// Método para crear rooms cuadradas en cada BoundBox
      /// </summary>
      /// <param name="roomsList"> Lista con los espacios en caja para cada room </param>
-     /// <returns> El HashSet con las posiciones del suelo que ocuparán las rooms </returns>
-     private HashSet<Vector2Int> CreateSimpleRooms(List<BoundsInt> roomsList)
+     /// <returns> Una lista de arreglos que contiene las posiciones de las room y el tipo </returns>
+     private List<object[]> CreateSimpleRooms(List<BoundsInt> roomsList)
      {
-          HashSet<Vector2Int> floor = new HashSet<Vector2Int>();
+          // Se usa esto para almacenar las rooms con sus posiciones y el tipo de room
+          List<object[]> rooms = new List<object[]>();
+
+          // Lista de los puntos centrales para distinguir las rooms
+          List<Vector2Int> roomCenters = new List<Vector2Int>();
           foreach (var room in roomsList)
           {
+               // Añadimos el centro de cada room a la lista de centros, hay que castear a Vector2Int
+               roomCenters.Add(((Vector2Int)Vector3Int.RoundToInt(room.center)));
+          }
+
+          foreach (var room in roomsList)
+          {
+               HashSet<Vector2Int> floor = new HashSet<Vector2Int>();
+
                // Aquí usamos el offset para saber desde donde comenzamos a pintar el suelo y haya ese espacio entre rooms
                for (int col = offset; col < room.size.x - offset; col++)
                {
@@ -245,16 +299,44 @@ public class RoomFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
                          floor.Add(position);
                     }
                }
+
+               // Añado las posiciones, la room y el tipo
+               if (room == roomsList[0])
+               {
+                    rooms.Add(new object[] {floor, room, "initialRoom"});
+               }
+               // La sala final debe ser la más lejana
+               else if ((Vector2Int)Vector3Int.RoundToInt(room.center) == FindFartherPointTo((Vector2Int)Vector3Int.RoundToInt(roomsList[0].center), roomCenters)) {
+                    rooms.Add(new object[] { floor,room, "finalRoom" });
+               } 
+               else
+               {
+                    // Aquí se puede usar un random y pesos para cambiar a otro tipo de sala y no sea solo de enemigos
+                    rooms.Add(new object[] { floor, room, "combatRoom" });
+               }
+
           }
-          return floor;
+          return rooms;
      }
 
 
-     private HashSet<Vector2Int> CreateRoomsRandomly(List<BoundsInt> roomsList)
+     private List<object[]> CreateRoomsRandomly(List<BoundsInt> roomsList)
      {
-          HashSet<Vector2Int> floor = new HashSet<Vector2Int>();
+          // Se usa esto para almacenar las rooms con sus posiciones y el tipo de room
+          List<object[]> rooms = new List<object[]>();
+
+          // Lista de los puntos centrales para distinguir las rooms
+          List<Vector2Int> roomCenters = new List<Vector2Int>();
+          foreach (var room in roomsList)
+          {
+               // Añadimos el centro de cada room a la lista de centros, hay que castear a Vector2Int
+               roomCenters.Add(((Vector2Int)Vector3Int.RoundToInt(room.center)));
+          }
+
           for (int i = 0; i < roomsList.Count; i++)
           {
+               HashSet<Vector2Int> floor = new HashSet<Vector2Int>();
+
                var roomBounds = roomsList[i];
                // Esta es la forma de pasar parametros del bounds a posiciones 2D, en createRooms usamos otra forma que es con casteo
                var roomCenter = new Vector2Int(Mathf.RoundToInt(roomBounds.center.x), Mathf.RoundToInt(roomBounds.center.y));
@@ -270,8 +352,24 @@ public class RoomFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
                          floor.Add(position);
                     }
                }
+
+               // Añado las posiciones, la room y el tipo
+               if (roomsList[i] == roomsList[0])
+               {
+                    rooms.Add(new object[] { floor, roomsList[i], "initialRoom" });
+               }
+               // La sala final debe ser la más lejana
+               else if ((Vector2Int)Vector3Int.RoundToInt(roomsList[i].center) == FindFartherPointTo((Vector2Int)Vector3Int.RoundToInt(roomsList[0].center), roomCenters))
+               {
+                    rooms.Add(new object[] { floor, roomsList[i], "finalRoom" });
+               }
+               else
+               {
+                    // Aquí se puede usar un random y pesos para cambiar a otro tipo de sala y no sea solo de enemigos
+                    rooms.Add(new object[] { floor, roomsList[i], "combatRoom" });
+               }
           }
-          return floor;
+          return rooms;
      }
 
 }
