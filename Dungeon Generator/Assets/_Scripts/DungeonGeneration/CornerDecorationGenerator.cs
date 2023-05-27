@@ -14,8 +14,7 @@ public static class CornerDecorationGenerator
      {
           var cornerPositions = FindWallsInDirections(floorPositions, Direction2D.diagonalDirectionsList);
 
-          // Pintaremos el muro en cada posicion
-          CreateCornerDecoration(tilemapVisualizer, cornerPositions, floorPositions);
+          DecorateCorner(tilemapVisualizer, cornerPositions, floorPositions);
      }
 
      /// <summary>
@@ -52,7 +51,7 @@ public static class CornerDecorationGenerator
      /// <param name="tilemapVisualizer"> Tilemap donde se pintarán los muros </param>
      /// <param name="cornerWallPositions"> Posición de la esquina del muro </param>
      /// <param name="floorPositions"> Posiciones del suelo </param>
-     private static void CreateCornerDecoration(TilemapVisualizer tilemapVisualizer, HashSet<Vector2Int> cornerWallPositions, HashSet<Vector2Int> floorPositions)
+     private static void DecorateCorner(TilemapVisualizer tilemapVisualizer, HashSet<Vector2Int> cornerWallPositions, HashSet<Vector2Int> floorPositions)
      {
           foreach (var position in cornerWallPositions)
           {

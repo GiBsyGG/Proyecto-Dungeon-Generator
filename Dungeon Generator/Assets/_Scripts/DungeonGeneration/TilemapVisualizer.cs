@@ -237,7 +237,7 @@ public class TilemapVisualizer : MonoBehaviour
           }
 
           // No siempre decoraremos la esquina
-          if (UnityEngine.Random.Range(0,2) == 1)
+          if (UnityEngine.Random.Range(0f,1f) < 0.5)
           {
                tile = null;
           }
@@ -247,7 +247,7 @@ public class TilemapVisualizer : MonoBehaviour
                // Si el tipo de tile existe lo pintamos
                PaintSingleTile(cornerDecoTilemap, tile, position);
           }
-
+          
      }
           /// <summary>
           /// Método para limpiar todas las Tiles del mapa
