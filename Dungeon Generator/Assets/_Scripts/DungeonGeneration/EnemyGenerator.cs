@@ -5,20 +5,20 @@ using UnityEngine;
 
 public static class EnemyGenerator
 {
-     public static List<GameObject> GenerateEnemys(HashSet<Vector2Int> floorPositions, Vector2Int roomCenter, GameObject enemy)
+     public static List<GameObject> GenerateEnemys(HashSet<Vector2Int> floorPositions, Vector2Int roomCenter, GameObject enemy, float amount)
      {
-          var potencialPositions = FindPotentialPositions(floorPositions, roomCenter, Direction2D.eightDirectionsList);
+          var potencialPositions = FindPotentialPositions(floorPositions, roomCenter, amount, Direction2D.eightDirectionsList);
 
           return generate(potencialPositions, enemy);
      }
 
-     private static HashSet<Vector2Int> FindPotentialPositions(HashSet<Vector2Int> floorPositions, Vector2Int roomCenters, List<Vector2Int> eightDirectionsList)
+     private static HashSet<Vector2Int> FindPotentialPositions(HashSet<Vector2Int> floorPositions, Vector2Int roomCenters, float amount, List<Vector2Int> eightDirectionsList)
      {
           HashSet<Vector2Int> potentialPositions = new HashSet<Vector2Int>();
 
           foreach (var position in floorPositions)
           {
-               if (UnityEngine.Random.Range(0f, 1f) < 0.1)
+               if (UnityEngine.Random.Range(0f, 1f) < amount)
                {
                     potentialPositions.Add(position);
                }

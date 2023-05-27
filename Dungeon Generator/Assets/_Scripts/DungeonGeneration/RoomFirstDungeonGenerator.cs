@@ -35,6 +35,10 @@ public class RoomFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
      [SerializeField]
      private GameObject enemy;
 
+     [SerializeField]
+     [Range(0, 1)]
+     private float percentEnemies = 0.1f;
+
      // Lista de instancia de enemigos para destruirlos luegos
      List<GameObject> enemies = new List<GameObject>();
 
@@ -116,7 +120,7 @@ public class RoomFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
                     case "combatRoom":
 
                          // Usamos el room floor para colocar los enemigos cercano al centro
-                         enemies = EnemyGenerator.GenerateEnemys(roomFloor, roomCenter, enemy);
+                         enemies = EnemyGenerator.GenerateEnemys(roomFloor, roomCenter, enemy, percentEnemies);
 
                          break;
 
