@@ -54,14 +54,14 @@ public class MovementController : MonoBehaviour
     
     public void GoToNextWaypoint(){ 
         _changeDir++; 
-        //print(_changeDir);
+        print(_changeDir);
         Vector2 _dir = direcciones[_currentWaypoint];
         _dir.Normalize();
         _rb.velocity = _dir * _speed;
         if(_changeDir > 150)
         {
             _currentWaypoint = random.Next(8);
-            //print(_currentWaypoint);
+            print(_currentWaypoint);
             _changeDir = 0;
         }
        // _agent.SetDestination(_waypoints[_currentWaypoint]);
