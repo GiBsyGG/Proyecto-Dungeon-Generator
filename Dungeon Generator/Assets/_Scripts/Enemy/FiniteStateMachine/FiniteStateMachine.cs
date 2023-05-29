@@ -10,11 +10,10 @@ public class FiniteStateMachine : MonoBehaviour
     [SerializeField] private Transform _target;
 
     public Transform Target => _target;
-    //public NavMeshController NavMeshController => _navMeshController;
     public EnemyConfig Config => _config;
+    public MovementController MovementController => _movementController;
 
-    
-    //private NavMeshController _navMeshController;
+    private MovementController _movementController;
     private EnemyConfig _config;
     private Dictionary<StateType, State> _statesDic = new();
     private StateType _currentState;
@@ -22,7 +21,7 @@ public class FiniteStateMachine : MonoBehaviour
 
     void Start()
     {
-        //_navMeshController = GetComponent<NavMeshController>();
+        _movementController = GetComponent<MovementController>();
         _config = GetComponent<EnemyConfig>();
         
         Bind(_config.FSMData);
@@ -40,8 +39,7 @@ public class FiniteStateMachine : MonoBehaviour
         
         if (_anim)
         {
-           // _anim.SetBool("IsWalking", _navMeshController.IsMoving);
-            _anim.SetFloat("WalkSpeed", 1);
+            //_anim.SetFloat("WalkSpeed", 1);
         }
     }
 
@@ -53,7 +51,7 @@ public class FiniteStateMachine : MonoBehaviour
     public void SetMovementSpeed(float speed)
     {
         _currentSpeed = speed;
-       // _navMeshController.SetSpeed(_currentSpeed);
+        _movementController.SetSpeed(_currentSpeed);
     }
     
     public void ToState(StateType newState)
