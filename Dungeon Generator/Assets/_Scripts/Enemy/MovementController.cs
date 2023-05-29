@@ -27,8 +27,9 @@ public class MovementController : MonoBehaviour
 
     void Start(){
         random = new System.Random();
-        _currentWaypoint = random.Next(8);
+        _currentWaypoint = random.Next(9);
         _changeDir = 0;
+        direcciones.Add(new Vector2(0, 0));
         direcciones.Add(new Vector2(0, 1));
         direcciones.Add(new Vector2(0, -1));
         direcciones.Add(new Vector2(1, 0));
@@ -60,7 +61,7 @@ public class MovementController : MonoBehaviour
         _rb.velocity = _dir * _speed;
         if(_changeDir > 150)
         {
-            _currentWaypoint = random.Next(8);
+            _currentWaypoint = random.Next(9);
             print(_currentWaypoint);
             _changeDir = 0;
         }
