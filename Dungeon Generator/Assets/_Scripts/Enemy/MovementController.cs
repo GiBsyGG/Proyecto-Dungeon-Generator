@@ -29,15 +29,15 @@ public class MovementController : MonoBehaviour
         random = new System.Random();
         _currentWaypoint = random.Next(9);
         _changeDir = 0;
-        direcciones.Add(new Vector2(0, 0));
+        direcciones.Add(new Vector2(0, 0));//detener animacion
         direcciones.Add(new Vector2(0, 1));
         direcciones.Add(new Vector2(0, -1));
         direcciones.Add(new Vector2(1, 0));
-        direcciones.Add(new Vector2(-1, 0));
+        direcciones.Add(new Vector2(-1, 0));//4
         direcciones.Add(new Vector2(1, 1));
-        direcciones.Add(new Vector2(-1,-1));
+        direcciones.Add(new Vector2(-1,-1));//6
         direcciones.Add(new Vector2(1,-1));
-        direcciones.Add(new Vector2(-1,-1));  
+        direcciones.Add(new Vector2(-1,-1));//8
 
         /*_waypoints = new Vector3[_waypointObjects.Length];
         for (int i = 0; i < _waypointObjects.Length; i++)
