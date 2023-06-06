@@ -27,17 +27,7 @@ public class AttackState : State
             if (_attackDelay <= 0)
             {
                 //Apply Damage
-                switch(_attackType)
-                {
-                    /*case EnemyAttackType.Explode:
-                        ExplodeAttack(fms,deltaTime);
-                        break;
-                    
-                    default:
-                        BasicAttack(fms,deltaTime);
-                        break;*/
-                }
-                
+                BasicAttack(fms,deltaTime);
             }
         }
     }

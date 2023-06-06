@@ -13,7 +13,11 @@ public class WallCollider : MonoBehaviour
     {
         print("choque");
         //_rb.velocity = _rb.velocity*-1;
-        fms.MovementController.TurnAround();
+        if(other.collider.name == "Walls" && fms.getCurrentState() == StateType.Patrol)
+        {
+            fms.MovementController.TurnAround();
+        }
+        
         /*if (other.CompareTag("Walls"))
         {
             print("pared");

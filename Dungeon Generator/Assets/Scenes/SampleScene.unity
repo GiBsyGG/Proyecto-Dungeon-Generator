@@ -12071,7 +12071,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Health: 2
   Speed: 3
-  ChaseSpeed: 2.7
+  ChaseSpeed: 5
   DetectionRange: 5
   ViewAngle: 95
   TauntDuration: 2
@@ -12081,10 +12081,10 @@ MonoBehaviour:
   AttackDamage: 1
   AttackType: 0
   DeadDelay: 1
-  InitialState: 1
+  InitialState: 2
   FSMData:
     States:
-    - StateType: 1
+    - StateType: 2
       Transition: []
 --- !u!4 &735797279
 Transform:
@@ -12116,6 +12116,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57a485cf946d32f428582696d1e7dc21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _player: {fileID: 1260430335}
   direcciones: []
 --- !u!50 &735797281
 Rigidbody2D:

@@ -23,7 +23,6 @@ public class FiniteStateMachine : MonoBehaviour
     {
         _movementController = GetComponent<MovementController>();
         _config = GetComponent<EnemyConfig>();
-        
         Bind(_config.FSMData);
 
         ToState(_config.InitialState);
@@ -87,5 +86,10 @@ public class FiniteStateMachine : MonoBehaviour
             
             _statesDic.Add(stateData.StateType, state);
         }
+    }
+
+    public StateType getCurrentState()
+    {
+        return _currentState;
     }
 }

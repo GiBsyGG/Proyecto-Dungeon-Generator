@@ -1,4 +1,8 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 [System.Serializable]
 public class ChaseState : State
@@ -13,17 +17,12 @@ public class ChaseState : State
     {
         //_navMeshRefreshTimer = 0;
         fms.SetMovementSpeed(fms.Config.ChaseSpeed);
-        //fms.NavMeshController.SetTarget(fms.Target);
+        fms.MovementController.SetTarget(fms.Target);
     }
 
     protected  override void OnUpdateState(FiniteStateMachine fms, float deltaTime)
     {
-       /* _navMeshRefreshTimer -= deltaTime;
-        if (_navMeshRefreshTimer <= 0)
-        {
-            fms.NavMeshController.GoToTarget();
-            _navMeshRefreshTimer = fms.Config.NavMeshTimeToRefresh;
-        }*/
+       fms.MovementController.GoToTarget();
     }
 
     protected  override void OnExitState(FiniteStateMachine fms)

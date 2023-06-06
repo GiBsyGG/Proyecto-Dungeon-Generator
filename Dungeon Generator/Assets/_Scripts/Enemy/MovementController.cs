@@ -9,6 +9,8 @@ public class MovementController : MonoBehaviour
     //[SerializeField] private Transform[] _waypointObjects;
     //[SerializeField] [HideInInspector] private Vector3[] _waypoints;
     private int _changeDir;
+    [SerializeField]
+    private GameObject _player;
     private Transform _target;  
     private System.Random random;
     private int _currentWaypoint;
@@ -38,13 +40,6 @@ public class MovementController : MonoBehaviour
         direcciones.Add(new Vector2(-1,-1));//6
         direcciones.Add(new Vector2(1,-1));
         direcciones.Add(new Vector2(-1,-1));//8
-
-        /*_waypoints = new Vector3[_waypointObjects.Length];
-        for (int i = 0; i < _waypointObjects.Length; i++)
-        {
-            _waypoints[i] = _waypointObjects[i].position;
-            _waypointObjects[i].gameObject.SetActive(false);
-        }*/
         
     }
     
@@ -65,6 +60,7 @@ public class MovementController : MonoBehaviour
             print(_currentWaypoint);
             _changeDir = 0;
         }
+        AnimRotation();
        // _agent.SetDestination(_waypoints[_currentWaypoint]);
         //_agent.isStopped = false;
         //_currentWaypoint++;  
@@ -79,8 +75,12 @@ public class MovementController : MonoBehaviour
     }
 
     public void GoToTarget(){  
-        //_agent.SetDestination(_target.position);
-        transform.position = Vector2.MoveTowards(transform.position,_target.position,_speed *Time.deltaTime);
+        Vector2 _dirChase = (Vector2)transform.position - (Vector2)_target.position;
+        print("persigue");
+        _dirChase.Normalize();
+        _rb.velocity = _dirChase * Math.Abs(_speed)*-1;
+        AnimRotation();
+        //transform.position = Vector2.MoveTowards(transform.position,_target.position,_speed *Time.deltaTime);
         //_agent.isStopped = false;
     }
     
@@ -90,23 +90,15 @@ public class MovementController : MonoBehaviour
         //_agent.ResetPath();  
     }
     
-    /*public bool IsAtDestination()
+   public void AnimRotation()
+   {
+    if(_rb.velocity.x < 0)
     {
-        if (_agent.pathPending)
-            return false;
-
-        if (_agent.remainingDistance > _agent.stoppingDistance)
-            return false;
-
-        return !_agent.hasPath || _agent.velocity.sqrMagnitude == 0f;
-    }*/
-
-    /*private void OnValidate()
-    {
-        _waypoints = new Vector3[_waypointObjects.Length];
-        for (int i = 0; i < _waypointObjects.Length; i++)
-        {
-            _waypoints[i] = _waypointObjects[i].position;
-        }
-    }*/
+        print("patras");
+        transform.rotation = Quaternion.Euler(0, 180, 0);
+    } else {
+        print("palante");
+        transform.rotation = Quaternion.Euler(0, 0, 0);
+    }
+   }
 }
