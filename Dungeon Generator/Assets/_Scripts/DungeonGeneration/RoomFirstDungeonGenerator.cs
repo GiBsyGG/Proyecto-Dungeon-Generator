@@ -367,10 +367,14 @@ public class RoomFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
                {
                     rooms.Add(new object[] { floor, roomsList[i], "finalRoom" });
                }
-               else
+               else if (Random.Range(0, 5) <= 2)
                {
                     // Aquí se puede usar un random y pesos para cambiar a otro tipo de sala y no sea solo de enemigos
                     rooms.Add(new object[] { floor, roomsList[i], "combatRoom" });
+               }
+               else 
+               {
+                    rooms.Add(new object[] { floor, roomsList[i], "xRoom" });
                }
           }
           return rooms;
