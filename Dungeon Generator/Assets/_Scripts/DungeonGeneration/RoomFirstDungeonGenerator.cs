@@ -47,7 +47,7 @@ public class RoomFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
           // Limpieza
           // Limpiar Room de posibles enemigos antes de generar nuevos
           InstancesDestroyer.DestroyInstances();
-
+          //EnemyGenerator.DestroyEnemies(enemies);
           CreateRooms();
      }
 

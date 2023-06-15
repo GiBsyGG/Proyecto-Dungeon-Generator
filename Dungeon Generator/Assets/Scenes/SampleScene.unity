@@ -19280,7 +19280,7 @@ GameObject:
   - component: {fileID: 1260430343}
   m_Layer: 6
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -19500,7 +19500,7 @@ GameObject:
   - component: {fileID: 1937810987}
   m_Layer: 6
   m_Name: WorldCollider
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

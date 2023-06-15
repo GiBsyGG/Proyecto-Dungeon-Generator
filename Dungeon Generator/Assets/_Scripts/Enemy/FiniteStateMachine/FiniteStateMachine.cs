@@ -25,7 +25,13 @@ public class FiniteStateMachine : MonoBehaviour
         _config = GetComponent<EnemyConfig>();
         Bind(_config.FSMData);
 
-        ToState(_config.InitialState);
+          // Asignamos el player a los prefabs enemigos
+          if (!_target)
+          {
+               _target = GameObject.FindWithTag("Player").transform;
+          }
+
+          ToState(_config.InitialState);
     }
     
     void Update()
