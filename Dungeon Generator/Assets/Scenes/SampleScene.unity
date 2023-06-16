@@ -11994,6 +11994,7 @@ MonoBehaviour:
   ramdomWalkRooms: 1
   enemy: {fileID: 633519134553127519, guid: 0ce6132daf8137844b1040e6c9c25330, type: 3}
   percentEnemies: 0.1
+  probCombatRooms: 0.1
 --- !u!4 &754505940
 Transform:
   m_ObjectHideFlags: 0

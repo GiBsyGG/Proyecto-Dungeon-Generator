@@ -38,16 +38,24 @@ public class RoomFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
      [SerializeField]
      [Range(0, 1)]
      private float percentEnemies = 0.1f;
+     [SerializeField]
+     [Range(0, 1)]
+     private float probCombatRooms = 0.1f;
 
-     // Lista de instancia de enemigos para destruirlos luegos
-     List<GameObject> enemies = new List<GameObject>();
+     // Lista de habitaciones de combate
+     List<RoomCombat> combatRooms= new List<RoomCombat>();
+
+
 
      protected override void RunProceduralGeneration()
      {
           // Limpieza
           // Limpiar Room de posibles enemigos antes de generar nuevos
-          InstancesDestroyer.DestroyInstances();
-          //EnemyGenerator.DestroyEnemies(enemies);
+          //InstancesDestroyer.DestroyInstances();
+          foreach (var room in combatRooms)
+          {
+               room.DeleteEnemies();
+          }
           CreateRooms();
      }
 
@@ -119,10 +127,15 @@ public class RoomFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
 
                     case "combatRoom":
 
-                         // Usamos el room floor para colocar los enemigos cercano al centro
-                         enemies = EnemyGenerator.GenerateEnemys(roomFloor, roomCenter, enemy, percentEnemies);
+                         // Lista de instancia de enemigos para destruirlos luegos
+                         List<GameObject> enemies = EnemyGenerator.GenerateEnemys(roomFloor, roomCenter, enemy, percentEnemies);
+
+                         RoomCombat roomE = new RoomCombat();
+                         roomE.setEnemies(enemies);
+                         combatRooms.Add(roomE);
 
                          break;
+            
 
                }
 
@@ -367,7 +380,7 @@ public class RoomFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
                {
                     rooms.Add(new object[] { floor, roomsList[i], "finalRoom" });
                }
-               else if (Random.Range(0, 5) <= 2)
+               else if (Random.Range(0f, 1f) <= probCombatRooms)
                {
                     // Aquí se puede usar un random y pesos para cambiar a otro tipo de sala y no sea solo de enemigos
                     rooms.Add(new object[] { floor, roomsList[i], "combatRoom" });

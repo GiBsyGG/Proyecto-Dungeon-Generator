@@ -6,6 +6,7 @@ using UnityEngine.UIElements;
 
 public class EnemyGenerator : MonoBehaviour
 {
+
      public static List<GameObject> GenerateEnemys(HashSet<Vector2Int> floorPositions, Vector2Int roomCenter, GameObject enemy, float amount)
      {
           var potencialPositions = FindPotentialPositions(floorPositions, roomCenter, amount, Direction2D.eightDirectionsList);
@@ -16,10 +17,12 @@ public class EnemyGenerator : MonoBehaviour
      private static HashSet<Vector2Int> FindPotentialPositions(HashSet<Vector2Int> floorPositions, Vector2Int roomCenters, float amount, List<Vector2Int> eightDirectionsList)
      {
           HashSet<Vector2Int> potentialPositions = new HashSet<Vector2Int>();
-
+          // TODO: Cambiar criterio para posiciones potenciales, usando overlapBox para saber si se está cerca de un muro u otro enemigo
+          // Otra forma es filtrar posiciones para conocer si hay dos muy cerca
+          // Otra es buscar comenzando desde el centro
           foreach (var position in floorPositions)
           {
-               if (UnityEngine.Random.Range(0f, 1f) < amount)
+               if (UnityEngine.Random.Range(0f, 1f) < amount/4)
                {
                     potentialPositions.Add(position);
                }
@@ -49,5 +52,24 @@ public class EnemyGenerator : MonoBehaviour
                Destroy(enemy);
           }
           enemies.Clear();
+     }
+}
+
+public class RoomCombat
+{
+     private List<GameObject> _enemies;
+
+     public void setEnemies(List<GameObject> enemies)
+     {
+          _enemies = enemies;
+     }
+
+     public void DeleteEnemies()
+     {
+          foreach (var enemy in _enemies)
+          {
+               MonoBehaviour.Destroy(enemy);
+          }
+          _enemies.Clear();
      }
 }
