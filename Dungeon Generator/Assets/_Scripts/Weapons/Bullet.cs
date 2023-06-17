@@ -56,6 +56,7 @@ public class Bullet : MonoBehaviour
 
             if (hit.transform.TryGetComponent(out IDamageable targetHit))
             {
+                Debug.Log("Enemigo");
                 targetHit.TakeHit();
             }
 

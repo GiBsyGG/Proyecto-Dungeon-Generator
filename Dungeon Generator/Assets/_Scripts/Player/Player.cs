@@ -2,25 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour, IDamageable
+public class Player : LivingEntity
 {
-    [field:SerializeField]
-    public int TotalHealthPoints { get; private set; }
-    
-    public int HealthPoints { get; private set; }
+     void Start()
+     {
+          InitHealth();
+     }
 
-    private void Start()
-    {
-        HealthPoints = TotalHealthPoints;
-    }
+     protected override void OnTakeDamage()
+     {
+          base.OnTakeDamage();
+          //TODO: Communicate new health
+     }
 
-    public void TakeHit()
-    {
-        if(HealthPoints <= 0)
-            return;
+     protected override void OnDeath()
+     {
+          base.OnDeath();
+          //TODO: Trigger Death animation
+          gameObject.SetActive(false);
 
-        HealthPoints--;
-        if(HealthPoints <= 0)
-            gameObject.SetActive(false);
-    }
+          GameManager.Instance.GameOver();
+     }
 }
