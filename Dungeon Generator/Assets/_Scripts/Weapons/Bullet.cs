@@ -52,11 +52,9 @@ public class Bullet : MonoBehaviour
         // If it hits something...
         if (hit.collider != null)
         {
-            Debug.Log("Hit with " + hit.collider.name);
 
             if (hit.transform.TryGetComponent(out IDamageable targetHit))
             {
-                Debug.Log("Enemigo");
                 targetHit.TakeHit();
             }
 

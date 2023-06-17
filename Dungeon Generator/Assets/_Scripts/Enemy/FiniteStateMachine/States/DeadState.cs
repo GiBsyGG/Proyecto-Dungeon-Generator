@@ -8,8 +8,9 @@ public class DeadState : State
     public float delay;
     protected override void OnEnterState(FiniteStateMachine fms)
     {
-        //fms.TriggerAnimation("Dead");
+        fms.TriggerAnimation("Dead");
         delay = fms.Config.DeadDelay;
+        fms.MovementController.StopAgent();
         
     }
 
@@ -18,9 +19,11 @@ public class DeadState : State
         
         if (delay > 0)
         {
+            
             delay -= deltaTime;
             if (delay <= 0)
             {
+                
                 fms.gameObject.SetActive(false);
             }
         }

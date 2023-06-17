@@ -85,7 +85,7 @@ public abstract class State
             case StateType.Dead:
                 return new DeadState();
         }
-
+        
         return null;
     }
 }

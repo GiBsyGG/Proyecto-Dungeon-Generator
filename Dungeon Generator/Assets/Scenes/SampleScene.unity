@@ -19432,6 +19432,9 @@ MonoBehaviour:
   _meleePoint: {fileID: 2145350838}
   _meleeWapon: {fileID: 486375727}
   _distWapon: {fileID: 773960988}
+  _collisionMask:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!1 &1387524084
 GameObject:
   m_ObjectHideFlags: 0
@@ -19724,6 +19727,34 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 633519134553127516, guid: 0ce6132daf8137844b1040e6c9c25330, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 633519134553127517, guid: 0ce6132daf8137844b1040e6c9c25330, type: 3}
+      propertyPath: DeadDelay
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 633519134553127517, guid: 0ce6132daf8137844b1040e6c9c25330, type: 3}
+      propertyPath: InitialState
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 633519134553127517, guid: 0ce6132daf8137844b1040e6c9c25330, type: 3}
+      propertyPath: FSMData.States.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 633519134553127517, guid: 0ce6132daf8137844b1040e6c9c25330, type: 3}
+      propertyPath: FSMData.States.Array.data[3].StateType
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 633519134553127517, guid: 0ce6132daf8137844b1040e6c9c25330, type: 3}
+      propertyPath: FSMData.States.Array.data[3].Transition.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 633519134553127517, guid: 0ce6132daf8137844b1040e6c9c25330, type: 3}
+      propertyPath: FSMData.States.Array.data[0].Transition.Array.data[0].TargetState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 633519134553127517, guid: 0ce6132daf8137844b1040e6c9c25330, type: 3}
+      propertyPath: FSMData.States.Array.data[3].Transition.Array.data[0].TargetState
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 633519134553127518, guid: 0ce6132daf8137844b1040e6c9c25330, type: 3}

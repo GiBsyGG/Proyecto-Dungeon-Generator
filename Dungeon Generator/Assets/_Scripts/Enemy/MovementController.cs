@@ -50,14 +50,14 @@ public class MovementController : MonoBehaviour
     
     public void GoToNextWaypoint(){ 
         _changeDir++; 
-        print(_changeDir);
+        
         Vector2 _dir = direcciones[_currentWaypoint];
         _dir.Normalize();
         _rb.velocity = _dir * _speed;
         if(_changeDir > 150)
         {
             _currentWaypoint = random.Next(9);
-            print(_currentWaypoint);
+            
             _changeDir = 0;
         }
         AnimRotation();
@@ -70,13 +70,12 @@ public class MovementController : MonoBehaviour
     
     public void TurnAround(){ 
         _speed = _speed*-1;
-        print("turn");
-        print(_speed);
+        
     }
 
     public void GoToTarget(){  
         Vector2 _dirChase = (Vector2)transform.position - (Vector2)_target.position;
-        print("persigue");
+        
         _dirChase.Normalize();
         _rb.velocity = _dirChase * Math.Abs(_speed)*-1;
         AnimRotation();
@@ -94,10 +93,10 @@ public class MovementController : MonoBehaviour
    {
     if(_rb.velocity.x < 0)
     {
-        print("patras");
+        
         transform.rotation = Quaternion.Euler(0, 180, 0);
     } else {
-        print("palante");
+        
         transform.rotation = Quaternion.Euler(0, 0, 0);
     }
    }

@@ -182,6 +182,8 @@ MonoBehaviour:
       Transition:
       - TargetState: 2
         Decision: {fileID: 0}
+    - StateType: 6
+      Transition: []
 --- !u!114 &633519134553127518
 MonoBehaviour:
   m_ObjectHideFlags: 0

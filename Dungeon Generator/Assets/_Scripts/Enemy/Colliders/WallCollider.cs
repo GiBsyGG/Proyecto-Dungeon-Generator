@@ -11,7 +11,7 @@ public class WallCollider : MonoBehaviour
     
     private void OnCollisionEnter2D(Collision2D other)
     {
-        print("choque");
+        
         //_rb.velocity = _rb.velocity*-1;
         if(other.collider.name == "Walls" && fms.getCurrentState() == StateType.Patrol)
         {
