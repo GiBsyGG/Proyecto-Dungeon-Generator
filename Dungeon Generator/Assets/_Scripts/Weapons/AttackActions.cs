@@ -23,9 +23,6 @@ public class AttackActions : MonoBehaviour
      [SerializeField]
      private GameObject _distWapon;
 
-     [SerializeField]
-     private LayerMask _collisionMask;
-
      private bool _isMelee = false;
 
      private void Update()
@@ -59,21 +56,6 @@ public class AttackActions : MonoBehaviour
           StartCoroutine(RotateObject());
      }
 
-     private void CheckCollision(Vector2 movement)
-     {
-          RaycastHit2D hit = Physics2D.Raycast(_meleePoint.position, _meleePoint.up, movement.magnitude, _collisionMask);
-
-          // If it hits something...
-          if (hit.collider != null)
-          {
-
-               if (hit.transform.TryGetComponent(out IDamageable targetHit))
-               {
-                    targetHit.TakeHit();
-               }
-          }
-     }
-
      // Corrutina para la rotación del ataque a melee
      IEnumerator RotateObject()
      {
@@ -89,7 +71,7 @@ public class AttackActions : MonoBehaviour
                elapsedTime += Time.deltaTime;
                float t = elapsedTime / rotationTime;
                _meleeWapon.transform.rotation = Quaternion.Lerp(startRotation, targetRotation, t * _meleeSpeed);
-               CheckCollision(_meleePoint.position);
+               
                yield return null;
           }
 
