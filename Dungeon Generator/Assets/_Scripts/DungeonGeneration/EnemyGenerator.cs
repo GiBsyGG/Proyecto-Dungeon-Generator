@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class EnemyGenerator : MonoBehaviour
+public static class EnemyGenerator
 {
 
      public static List<GameObject> GenerateEnemys(HashSet<Vector2Int> floorPositions, Vector2Int roomCenter, GameObject enemy, float amount)
@@ -49,7 +49,7 @@ public class EnemyGenerator : MonoBehaviour
           Debug.Log("Enemigos: ");
           foreach(var enemy in enemies)
           {
-               Destroy(enemy);
+               MonoBehaviour.Destroy(enemy);
           }
           enemies.Clear();
      }

@@ -19414,6 +19414,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <TotalHealthPoints>k__BackingField: 10
+  _body: {fileID: 367367464}
+  _weapon: {fileID: 773960988}
 --- !u!114 &1260430343
 MonoBehaviour:
   m_ObjectHideFlags: 0

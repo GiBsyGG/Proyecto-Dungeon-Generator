@@ -11,7 +11,12 @@ public static class PlayerGeneration
           GameObject playerObject = GameObject.Find("Player");
           if (playerObject != null)
           {
+               playerObject.TryGetComponent<Player>(out Player player);
+               player.OnRevive();
+               playerObject.SetActive(true);
                playerObject.transform.position = new Vector3(initialPosition.x, initialPosition.y, 0);
           }
      }
+
+     
 }
