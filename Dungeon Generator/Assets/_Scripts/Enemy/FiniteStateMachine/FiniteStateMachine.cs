@@ -12,8 +12,10 @@ public class FiniteStateMachine : MonoBehaviour
     public Transform Target => _target;
     public EnemyConfig Config => _config;
     public MovementController MovementController => _movementController;
+    public Rigidbody2D Rigidbody => _rigidbody;
 
     private MovementController _movementController;
+    private Rigidbody2D _rigidbody;
     private EnemyConfig _config;
     private Dictionary<StateType, State> _statesDic = new();
     private StateType _currentState;
@@ -23,6 +25,7 @@ public class FiniteStateMachine : MonoBehaviour
     {
         _movementController = GetComponent<MovementController>();
         _config = GetComponent<EnemyConfig>();
+        _rigidbody = GetComponent<Rigidbody2D>();
         Bind(_config.FSMData);
 
           // Asignamos el player a los prefabs enemigos

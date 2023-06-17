@@ -59,7 +59,23 @@ public class RoomCombat
 {
      private List<GameObject> _enemies;
 
-     public void setEnemies(List<GameObject> enemies)
+     // Metodo para simular el start
+     public void Start()
+     {
+          _enemies = new List<GameObject>();
+          // Suscribir el evento de muerte de cada enemigo
+          GameEvents.OnEnemyDeath += OnEnemyDeath;
+
+     }
+
+     // Metodo para simular el destroy
+     public void OnDestroy()
+     {
+          _enemies.Clear();
+          GameEvents.OnEnemyDeath -= OnEnemyDeath;
+     }
+
+     public void SetEnemies(List<GameObject> enemies)
      {
           _enemies = enemies;
      }
@@ -71,5 +87,24 @@ public class RoomCombat
                MonoBehaviour.Destroy(enemy);
           }
           _enemies.Clear();
+     }
+
+     public void OnEnemyDeath(Enemy deathEnemy)
+     {
+          // Que el enemigo que murio si sea el de esa sala
+          if (_enemies.Contains(deathEnemy.gameObject))
+          {
+               if (_enemies.Count > 0)
+               {
+                    
+                    _enemies.Remove(deathEnemy.gameObject);
+               }
+               if (_enemies.Count == 0)
+               {
+                    // TODO: Al morir todos se instancia un cofre, este con su  lógica interna, tal vez un prefab
+                    // Tal vez aquí solo sea crear la instancia
+                    Debug.Log("Todos muertos");
+               }
+          }
      }
 }

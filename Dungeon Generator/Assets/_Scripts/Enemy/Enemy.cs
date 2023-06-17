@@ -22,6 +22,6 @@ public class Enemy : LivingEntity
 
           //TODO: Communicate Enemy death
           //TODO: Delete Death enemies in the enemies room list
-          //GameEvents.OnEnemyDeath?.Invoke(this, _config.Points);
+          GameEvents.OnEnemyDeath?.Invoke(this);
      }
 }

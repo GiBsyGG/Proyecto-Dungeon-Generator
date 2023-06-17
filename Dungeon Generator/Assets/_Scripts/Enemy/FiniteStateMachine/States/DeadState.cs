@@ -11,6 +11,8 @@ public class DeadState : State
         fms.TriggerAnimation("Dead");
         delay = fms.Config.DeadDelay;
         fms.MovementController.StopAgent();
+        fms.TryGetComponent<BoxCollider2D> (out var boxCollider);
+        boxCollider.enabled = false;
         
     }
 

@@ -55,6 +55,8 @@ public class RoomFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
           foreach (var room in combatRooms)
           {
                room.DeleteEnemies();
+               // Principalmente para desuscribir el evento de muerte enemiga
+               room.OnDestroy();
           }
           CreateRooms();
      }
@@ -131,7 +133,10 @@ public class RoomFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
                          List<GameObject> enemies = EnemyGenerator.GenerateEnemys(roomFloor, roomCenter, enemy, percentEnemies);
 
                          RoomCombat roomE = new RoomCombat();
-                         roomE.setEnemies(enemies);
+
+                         // Este método es para vigilar el evento en cada room
+                         roomE.Start();
+                         roomE.SetEnemies(enemies);
                          combatRooms.Add(roomE);
 
                          break;
