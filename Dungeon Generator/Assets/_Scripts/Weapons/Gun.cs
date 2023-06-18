@@ -33,7 +33,7 @@ public class Gun : MonoBehaviour
         if (Time.time > nextShotTime){
         
           if (fireMode == FireMode.Burst){
-             Debug.Log("Burst");
+             
             if(shotsRemainingInBurst == 0){
               return;
             }
@@ -41,7 +41,7 @@ public class Gun : MonoBehaviour
           }
  
         else if (fireMode == FireMode.Single){
-          Debug.Log("single");
+          
           if (!triggerRelaesedSinceLastShot){
             return;
           }

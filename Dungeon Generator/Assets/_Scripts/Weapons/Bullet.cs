@@ -25,7 +25,6 @@ public class Bullet : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody2D>();
         _creationTime = Time.time;
-        Debug.Log(_creationTime);
     }
     
     public void SetSpeed(float newSpeed) {
