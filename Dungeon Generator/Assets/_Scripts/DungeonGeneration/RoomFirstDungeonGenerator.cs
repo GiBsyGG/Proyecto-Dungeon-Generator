@@ -97,6 +97,19 @@ public class RoomFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
                rooms = CreateSimpleRooms(roomsList);
           }
 
+          // Lista de los puntos centrales para conectar los corredores
+          List<Vector2Int> roomCenters = new List<Vector2Int>();
+          foreach (var room in roomsList)
+          {
+               // Añadimos el centro de cada room a la lista de centros, hay que castear a Vector2Int
+               roomCenters.Add(((Vector2Int)Vector3Int.RoundToInt(room.center)));
+          }
+
+          HashSet<Vector2Int> corridors = ConnectRooms(roomCenters);
+
+          // Unimos los corredores creados al suelo para pintarlos luego
+          floor.UnionWith(corridors);
+
           // Union de las salas de cada room hayada
           foreach (object[] room in rooms)
           {
@@ -144,26 +157,17 @@ public class RoomFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
 
                }
 
+               // Al roomFloor le quitamos los corredores para evitar decorar estos
+               roomFloor.ExceptWith(corridors);
+
                // Se decoran las esquinas de las salas
                CornerDecorationGenerator.CreateCornerDecoration(roomFloor, tilemapVisualizer);
           }
 
-          // Lista de los puntos centrales para conectar los corredores
-          List<Vector2Int> roomCenters = new List<Vector2Int>();
-          foreach (var room in roomsList)
-          {
-               // Añadimos el centro de cada room a la lista de centros, hay que castear a Vector2Int
-               roomCenters.Add(((Vector2Int)Vector3Int.RoundToInt(room.center)));
-          }
-
-          HashSet<Vector2Int> corridors = ConnectRooms(roomCenters);
-          
-          // Unimos los corredores creados al suelo para pintarlos luego
-          floor.UnionWith(corridors);
-
           // Luego de crear el suelo, lo pintamos y ponemos sus respectivos muros
           tilemapVisualizer.PaintFloorTiles(floor);
           WallGenerator.CreateWalls(floor, tilemapVisualizer);
+
      }
 
 
