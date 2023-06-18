@@ -164,6 +164,6 @@ MonoBehaviour:
   fireMode: 1
   _muzzle: {fileID: 5288971301294420816}
   _projectile: {fileID: 7961499794655890127, guid: 5b689a1377952524a9998332e6c3ffab, type: 3}
-  _msBetweenShots: 500
-  _muzzleVelocity: 35
+  _msBetweenShots: 100
+  _muzzleVelocity: 7
   _burstCount: 3
