@@ -36,7 +36,6 @@ public class PlayerMovement : MonoBehaviour
      {
 
           _actualWeapon = GetComponent<GunController>();
-          _gun = _actualWeapon.equippedGun;
           _rb = GetComponent<Rigidbody2D>();
           _cam = Camera.main;
           _bodyAnimator = _body.GetComponent<Animator>();
@@ -79,7 +78,7 @@ public class PlayerMovement : MonoBehaviour
           float angle = Mathf.Atan2(aimVector.y, aimVector.x) * Mathf.Rad2Deg;
 
           _weapon.rotation = Quaternion.Euler(0, 0, angle);
-
+          _gun = _actualWeapon.equippedGun;
           // Si la rotac�on va hacia atras del personaje invierte el Sprite del arma y el personaje
           if (_weapon.rotation.z < -0.5 || _weapon.rotation.z > 0.5)
           {

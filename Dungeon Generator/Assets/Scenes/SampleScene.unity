@@ -19217,11 +19217,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1260430338}
+  - component: {fileID: 1260430344}
   - component: {fileID: 1260430336}
   - component: {fileID: 1260430339}
   - component: {fileID: 1260430342}
   - component: {fileID: 1260430343}
-  - component: {fileID: 1260430344}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
