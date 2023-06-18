@@ -7,7 +7,7 @@ public class Gun : MonoBehaviour
     public enum FireMode{Auto, Burst, Single};
     public FireMode fireMode;
     [SerializeField]
-    private Transform _muzzle;
+    private Transform[]  _projectileSpawn;
     [SerializeField]
     private GameObject _projectile;
     [SerializeField]
@@ -46,13 +46,17 @@ public class Gun : MonoBehaviour
             return;
           }
         }
+        
+        for (int i =0; i < _projectileSpawn.Length; i++){
 
         nextShotTime = Time.time + _msBetweenShots / 1000;
-        GameObject newProjectile = Instantiate(_projectile, _muzzle.position, _muzzle.rotation);  
+        GameObject newProjectile = Instantiate(_projectile, _projectileSpawn[i].position, _projectileSpawn[i].rotation);  
           newProjectile.TryGetComponent<Bullet>(out Bullet bullet);
           if (bullet != null){
                bullet.SetSpeed(_muzzleVelocity);
           }  
+
+        }
         }
     }
 

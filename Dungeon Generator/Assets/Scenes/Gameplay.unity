@@ -12001,7 +12001,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
@@ -12631,7 +12631,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 27.8, y: -390.8}
+  m_AnchoredPosition: {x: 27.800049, y: -390.8}
   m_SizeDelta: {x: 353.3107, y: 109.8666}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1036376897
@@ -20128,7 +20128,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   WeaponHold: {fileID: 1594539592}
-  startingGun: {fileID: -3402751233541268443, guid: 125287da4f4fcf74e9d697f484fc65ff, type: 3}
+  startingGun: {fileID: 664954590421830090, guid: a2ddacb1394e5b04fb6231a32cd27046, type: 3}
   equippedGun: {fileID: 0}
 --- !u!1 &1315536543
 GameObject:
