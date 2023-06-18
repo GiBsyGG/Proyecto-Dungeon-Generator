@@ -20129,9 +20129,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   WeaponHold: {fileID: 1594539592}
   allGuns:
+  - {fileID: 664954590421830090, guid: a2ddacb1394e5b04fb6231a32cd27046, type: 3}
   - {fileID: 2573382993982969858, guid: 811be42eeb43e63449788acbd0d8e00d, type: 3}
   - {fileID: 2221121464112409672, guid: 56347054e2f978148900466748632629, type: 3}
-  - {fileID: 664954590421830090, guid: a2ddacb1394e5b04fb6231a32cd27046, type: 3}
   equippedGun: {fileID: 0}
 --- !u!1 &1315536543
 GameObject:
@@ -20412,7 +20412,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -205726582, guid: 354874de70117d94a96cb37b0b173825, type: 3}
+  m_Sprite: {fileID: -762074860, guid: d71a3dc7aa20fad4f9a99fc76a9254ba, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

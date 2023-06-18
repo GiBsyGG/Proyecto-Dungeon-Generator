@@ -82,15 +82,22 @@ public class PlayerMovement : MonoBehaviour
           // Si la rotac�on va hacia atras del personaje invierte el Sprite del arma y el personaje
           if (_weapon.rotation.z < -0.5 || _weapon.rotation.z > 0.5)
           {
-              SpriteRenderer sprite = _gun.gameObject.GetComponentInChildren<SpriteRenderer>();
-              sprite.flipY = true;
+              if(_gun != null)
+               {
+                    SpriteRenderer sprite = _gun.gameObject.GetComponentInChildren<SpriteRenderer>();
+                    sprite.flipY = true;
+               }
+              
               transform.rotation = Quaternion.Euler(0, 180, 0);
           }
           else
           {
-              SpriteRenderer sprite =  _gun.gameObject.GetComponentInChildren<SpriteRenderer>();
-              sprite.flipY = false;
-               transform.rotation = Quaternion.Euler(0, 0, 0);
+              if (_gun != null)
+               {
+                    SpriteRenderer sprite = _gun.gameObject.GetComponentInChildren<SpriteRenderer>();
+                    sprite.flipY = false;
+               }  
+              transform.rotation = Quaternion.Euler(0, 0, 0);
           }
      }
 

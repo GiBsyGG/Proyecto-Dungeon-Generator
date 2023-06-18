@@ -5,6 +5,11 @@ using UnityEngine;
 public class Gun : MonoBehaviour
 { 
     public enum FireMode{Auto, Burst, Single};
+    public enum GunType {ShotGun, MachineGun, Pistol};
+
+    [SerializeField]
+    public GunType type;
+    [SerializeField]
     public FireMode fireMode;
     [SerializeField]
     private Transform[]  _projectileSpawn;
@@ -16,6 +21,8 @@ public class Gun : MonoBehaviour
     private float _muzzleVelocity = 10;
     [SerializeField]
     private int  _burstCount;
+
+    public SpriteRenderer spriteRenderer;
 
 
     float nextShotTime;

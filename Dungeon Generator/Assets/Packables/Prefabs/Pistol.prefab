@@ -48,6 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 607f2f1b689de4541a3fb83d1e4fef91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 2
   fireMode: 1
   _projectileSpawn:
   - {fileID: 4185729280770144119}
@@ -55,6 +56,7 @@ MonoBehaviour:
   _msBetweenShots: 200
   _muzzleVelocity: 7
   _burstCount: 3
+  spriteRenderer: {fileID: 7941041504797111896}
 --- !u!1 &1714924189089137176
 GameObject:
   m_ObjectHideFlags: 0
