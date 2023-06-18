@@ -8,6 +8,8 @@ public class AttackActions : MonoBehaviour
      [SerializeField]
      private GameObject _projectilePrefab;
 
+     private GunController _gunController;
+
      [SerializeField]
      private Transform _shootPoint;
 
@@ -24,13 +26,17 @@ public class AttackActions : MonoBehaviour
      private GameObject _distWapon;
 
      private bool _isMelee = false;
+     
+     private void Start(){
+          _gunController = GetComponent<GunController>();
+     }
 
      private void Update()
      {
           // Shoot Gun
-          if (Input.GetButtonDown("Fire1") && !_isMelee)
+          if (Input.GetMouseButton(0) && !_isMelee)
           {
-               Shoot();
+               GunShoot();
           }
 
           // Melee Attack
@@ -40,10 +46,8 @@ public class AttackActions : MonoBehaviour
           }
      }
 
-     private void Shoot() {
-          GameObject projectile = Instantiate(_projectilePrefab);
-          projectile.transform.position = _shootPoint.position;
-          projectile.transform.rotation = _shootPoint.rotation;
+     private void GunShoot() {
+          _gunController.Shoot();
      }
 
      private void Melee() {
@@ -56,7 +60,7 @@ public class AttackActions : MonoBehaviour
           StartCoroutine(RotateObject());
      }
 
-     // Corrutina para la rotación del ataque a melee
+     // Corrutina para la rotaciï¿½n del ataque a melee
      IEnumerator RotateObject()
      {
           Quaternion startRotation = _meleePoint.rotation * Quaternion.Euler(0f, 0f, 90f);
@@ -65,7 +69,7 @@ public class AttackActions : MonoBehaviour
           float elapsedTime = 0f;
           float rotationTime = 0.3f; // Duracion de la rotacion
 
-          // Animación de ataque a melee
+          // Animaciï¿½n de ataque a melee
           while (elapsedTime < rotationTime)
           {
                elapsedTime += Time.deltaTime;

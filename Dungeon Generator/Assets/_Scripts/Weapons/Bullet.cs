@@ -13,7 +13,7 @@ public class Bullet : MonoBehaviour
     private GameObject _hitVFXPrefab;
 
     [SerializeField]
-    private float _lifeTime = 3;
+    private float _lifeTime = 2;
 
     [SerializeField]
     private LayerMask _collisionMask;
@@ -25,13 +25,18 @@ public class Bullet : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody2D>();
         _creationTime = Time.time;
+        Debug.Log(_creationTime);
+    }
+    
+    public void SetSpeed(float newSpeed) {
+        _speed = newSpeed;
     }
     
     private void Update()
     {
         if (Time.time > _creationTime + _lifeTime)
         {
-            DestroyProjectile();
+            DestroyProjectile(); 
         }
     }
     
