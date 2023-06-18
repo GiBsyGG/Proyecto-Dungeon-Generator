@@ -22,9 +22,6 @@ public class AttackActions : MonoBehaviour
      [SerializeField]
      private GameObject _meleeWapon;
 
-     [SerializeField]
-     private GameObject _distWapon;
-
      private bool _isMelee = false;
      
      private void Start(){
@@ -55,7 +52,7 @@ public class AttackActions : MonoBehaviour
 
           // Activamos el melee y desactivamos el fusil
           _meleeWapon.SetActive(true);
-          _distWapon.SetActive(false);
+          _gunController.equippedGun.gameObject.SetActive(false);
 
           StartCoroutine(RotateObject());
      }
@@ -81,7 +78,7 @@ public class AttackActions : MonoBehaviour
 
           // Terminamos la rotacion, apagamos el melee y encendemos el arma de nuevo
           _meleeWapon.SetActive(false);
-          _distWapon.SetActive(true);
+          _gunController.equippedGun.gameObject.SetActive(true);
           _isMelee = false;
      }
 
