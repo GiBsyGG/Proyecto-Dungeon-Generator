@@ -24,7 +24,7 @@ public class PlayerMovement : MonoBehaviour
      [Space(20)]
      [SerializeField]
      private Transform _weapon;
-     private GunController _actualWeapon;
+     private GunController _gunController;
      private Gun _gun;
 
      // Arma melee del player
@@ -35,7 +35,7 @@ public class PlayerMovement : MonoBehaviour
      private void Start()
      {
 
-          _actualWeapon = GetComponent<GunController>();
+          _gunController = GetComponent<GunController>();
           _rb = GetComponent<Rigidbody2D>();
           _cam = Camera.main;
           _bodyAnimator = _body.GetComponent<Animator>();
@@ -78,7 +78,7 @@ public class PlayerMovement : MonoBehaviour
           float angle = Mathf.Atan2(aimVector.y, aimVector.x) * Mathf.Rad2Deg;
 
           _weapon.rotation = Quaternion.Euler(0, 0, angle);
-          _gun = _actualWeapon.equippedGun;
+          _gun = _gunController.equippedGun;
           // Si la rotac�on va hacia atras del personaje invierte el Sprite del arma y el personaje
           if (_weapon.rotation.z < -0.5 || _weapon.rotation.z > 0.5)
           {

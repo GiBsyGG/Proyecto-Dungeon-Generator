@@ -14,15 +14,14 @@ public class Player : LivingEntity
      private Transform _body;
 
      // Arma del player
-     [Space(20)]
-     [SerializeField]
-     private GameObject _weapon;
+     private GunController _gunController;
 
      void Start()
      {
           InitHealth();
           _bodyAnimator = _body.GetComponent<Animator>();
           _rigidbody = GetComponent<Rigidbody2D>();
+          _gunController = GetComponent<GunController>();
      }
 
      protected override void OnTakeDamage()
@@ -45,8 +44,10 @@ public class Player : LivingEntity
 
           // Detenemos el player
           _rigidbody.bodyType = RigidbodyType2D.Static;
-          _weapon.SetActive(false);
-          
+
+          // Apagamos el arma
+          _gunController.equippedGun.gameObject.SetActive(false);
+
           _bodyAnimator.SetBool("isDeath", true);
           
           GameManager.Instance.GameOver();
@@ -60,7 +61,7 @@ public class Player : LivingEntity
           _bodyAnimator.SetBool("isDeath", false);
 
           // Activamos el arma
-          _weapon.SetActive(true);
+          _gunController.equippedGun.gameObject.SetActive(true);
 
           // Devolvemos el RB
           _rigidbody.bodyType = RigidbodyType2D.Dynamic;
