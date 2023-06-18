@@ -24,12 +24,17 @@ public class GunController : MonoBehaviour
         equippedGun.transform.parent =WeaponHold;
     }
     
-    public void Shoot(){
+    public void OnTriggerHold(){
         if (equippedGun != null) {
-            equippedGun.Shoot();
+            equippedGun.OnTriggerHold();
         }
     }
 
+    public void OnTriggerrRelease(){
+         if (equippedGun != null) {
+            equippedGun.OnTriggerrRelease();
+        }
 
+    }
     
 }

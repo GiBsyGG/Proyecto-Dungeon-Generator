@@ -33,7 +33,12 @@ public class AttackActions : MonoBehaviour
           // Shoot Gun
           if (Input.GetMouseButton(0) && !_isMelee)
           {
-               GunShoot();
+              ShootTriggerHold();
+          }
+
+          if (Input.GetMouseButtonUp(0) && !_isMelee){
+               
+               ShootTriggerrRelease();
           }
 
           // Melee Attack
@@ -43,9 +48,14 @@ public class AttackActions : MonoBehaviour
           }
      }
 
-     private void GunShoot() {
-          _gunController.Shoot();
+     private void ShootTriggerHold() {
+          _gunController.OnTriggerHold();
      }
+
+     private void ShootTriggerrRelease() {
+          _gunController.OnTriggerrRelease();
+     }
+
 
      private void Melee() {
           _isMelee = true;
