@@ -42,6 +42,9 @@ public class PlayerLoot : MonoBehaviour
                     _player.HealthPoints = _player.TotalHealthPoints;
                }
           }
+
+          // Llamar al evento de la actualizar la vida
+          GameEvents.OnPlayerHealthChangeEvent?.Invoke(_player.HealthPoints);
      }
 
      public void ChangeGun(Gun.GunType gunType)

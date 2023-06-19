@@ -57,7 +57,7 @@ MonoBehaviour:
   _muzzleVelocity: 7
   _burstCount: 3
   spriteRenderer: {fileID: 7941041504797111896}
-  UIGunIcon: {fileID: 0}
+  UIGunIcon: {fileID: -205726582, guid: 354874de70117d94a96cb37b0b173825, type: 3}
 --- !u!1 &1714924189089137176
 GameObject:
   m_ObjectHideFlags: 0

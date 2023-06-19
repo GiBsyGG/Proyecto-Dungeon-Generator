@@ -9,7 +9,9 @@ public static class GameEvents
 
      // Game Over -> Points, new max Score, time, level
      // Points Update
-     // Evento de posible interaccion
+     // Evento de posible interaccion? aun no necesario para el cambio de icono, tal vez para otra cosa
+
+     public static Action<Sprite> OnGunChangeEvent;  // New gun Sprite
 
      public static Action<int> OnPlayerHealthChangeEvent; // currentHealth
 

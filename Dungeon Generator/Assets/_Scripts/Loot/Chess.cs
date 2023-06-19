@@ -7,16 +7,30 @@ public class Chess : MonoBehaviour, IInteractable
      [SerializeField]
      Loot[] _loots;
      [SerializeField]
+     private int _lootAmountDropped = 1;
+     [SerializeField]
+     private float _lootDuration = 5f;
+     [SerializeField]
      private Sprite chestOpenSprite;
+  
      private bool open = false;
+     private Loot _lootDropped;
 
 
      // Cuando el player interaccione debe abrirse
      public void Open()
      {
-          int randomLoot = Random.Range(0, _loots.Length);
-          // TODO: Instanciar el loot en un area cerca y con rotacion random
-          Instantiate(_loots[randomLoot], transform.position + (Vector3)Random.insideUnitCircle, Quaternion.identity);
+          // Soltar los varios loots y destruirlos despues de un tiempo
+          for (int i = 0; i < _lootAmountDropped; i++)
+          {
+               int randomLoot = Random.Range(0, _loots.Length);
+               
+               _lootDropped = Instantiate(_loots[randomLoot], transform.position + (Vector3)Random.insideUnitCircle, Quaternion.identity);
+               // Inicia lo corrutina para desaparecer el loot
+               StartCoroutine(DestroyLootAfterTime(_lootDropped));
+          }
+
+          // Luego de soltar el loot
 
           // Desactivo la animacion y cambio el sprite
           if (TryGetComponent(out Animator anim))
@@ -44,4 +58,24 @@ public class Chess : MonoBehaviour, IInteractable
                Open();
           }
      }
+
+     // Corrutina para desaparecer el Loot despues de un tiempo
+     IEnumerator DestroyLootAfterTime(Loot loot)
+     {
+          while (true)
+          {
+               // Esperar 5 segundos
+               yield return new WaitForSeconds(_lootDuration);
+               break;
+          }
+
+          // Comprobamos que el loot no se haya destruido al ser usado por el player
+          if(loot != null)
+          {
+               // Destruir el objeto despues de esperar los segundos
+               Destroy(loot.gameObject);
+          }
+          
+     }
+
 }

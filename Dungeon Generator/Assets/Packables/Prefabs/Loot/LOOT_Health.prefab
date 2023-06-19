@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1868061328019236318}
   - component: {fileID: 1868061328019236319}
   - component: {fileID: -5237904011879878753}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: LOOT_Health
   m_TagString: Untagged
   m_Icon: {fileID: 0}

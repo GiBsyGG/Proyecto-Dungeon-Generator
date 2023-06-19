@@ -10927,7 +10927,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_Sprite: {fileID: -150523396, guid: 0c187a32c5bde4747be8d00770b07403, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -12128,7 +12128,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 2039
+    m_Bits: 4087
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -20612,7 +20612,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d30b94e49c3dd674188fc43fc7b8b077, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gunEquipedSprite: {fileID: 0}
+  gunEquipedSprite: {fileID: 1890448380}
 --- !u!1 &1937810985
 GameObject:
   m_ObjectHideFlags: 0

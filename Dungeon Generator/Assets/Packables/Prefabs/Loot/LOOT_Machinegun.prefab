@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1686483909111263618}
   - component: {fileID: 1686483909111263629}
   - component: {fileID: 3698190437407978501}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: LOOT_Machinegun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
