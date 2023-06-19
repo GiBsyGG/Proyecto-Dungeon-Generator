@@ -5,8 +5,10 @@ using UnityEngine;
 
 public class PlayerLoot : MonoBehaviour
 {
+
      private Player _player;
      private GunController _gunController;
+
 
      private void Start()
      {

@@ -5,7 +5,10 @@ using UnityEngine;
 
 public class PlayerInteractable : MonoBehaviour
 {
-    public static PlayerInteractable Instance;
+     [SerializeField]
+     private GameObject _interactionIcon;
+
+     public static PlayerInteractable Instance;
 
     private List<IInteractable> _objectsInRange = new();
 
@@ -29,8 +32,12 @@ public class PlayerInteractable : MonoBehaviour
      {
           if (_objectsInRange.Count > 0)
           {
-               // TODO: En UI -> Icono de interaccion
+               _interactionIcon.SetActive(true);
                // Lanzar el evento de posible interaccion?
+          }
+          else
+          {
+               _interactionIcon.SetActive(false);
           }
 
           if (Input.GetKeyDown(KeyCode.T))

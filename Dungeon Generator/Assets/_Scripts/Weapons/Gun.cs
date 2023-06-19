@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Gun : MonoBehaviour
 { 
@@ -23,6 +24,8 @@ public class Gun : MonoBehaviour
     private int  _burstCount;
 
     public SpriteRenderer spriteRenderer;
+    public Sprite UIGunIcon;
+
 
 
     float nextShotTime;

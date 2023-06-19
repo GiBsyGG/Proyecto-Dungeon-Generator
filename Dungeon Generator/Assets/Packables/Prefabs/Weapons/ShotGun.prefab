@@ -79,6 +79,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 607f2f1b689de4541a3fb83d1e4fef91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 0
   fireMode: 2
   _projectileSpawn:
   - {fileID: 1196453390599087807}
@@ -88,6 +89,8 @@ MonoBehaviour:
   _msBetweenShots: 500
   _muzzleVelocity: 5
   _burstCount: 0
+  spriteRenderer: {fileID: 4951749242275866512}
+  UIGunIcon: {fileID: -762074860, guid: 354874de70117d94a96cb37b0b173825, type: 3}
 --- !u!1 &4413730947063288784
 GameObject:
   m_ObjectHideFlags: 0
@@ -160,7 +163,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 3
   m_Sprite: {fileID: 1772703093, guid: 0d5e657ee5a074e4baa53d5b248a01d2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

@@ -25,8 +25,7 @@ public class DeadState : State
             delay -= deltaTime;
             if (delay <= 0)
             {
-                
-                fms.gameObject.SetActive(false);
+               MonoBehaviour.Destroy(fms.gameObject);
             }
         }
     }

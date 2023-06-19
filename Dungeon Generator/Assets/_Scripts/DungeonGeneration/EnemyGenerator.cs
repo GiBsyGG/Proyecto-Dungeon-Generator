@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
+using static UnityEngine.EventSystems.EventTrigger;
 
 public static class EnemyGenerator
 {
@@ -58,20 +59,25 @@ public static class EnemyGenerator
 public class RoomCombat
 {
      private List<GameObject> _enemies;
-
+     private Vector2Int _roomCenter;
+     private GameObject _reward;
+     private GameObject _rewardClone;
      // Metodo para simular el start
-     public void Start()
+     public void Start(Vector2Int center, GameObject reward)
      {
           _enemies = new List<GameObject>();
+          _roomCenter = center;
+          _reward = reward;
           // Suscribir el evento de muerte de cada enemigo
           GameEvents.OnEnemyDeath += OnEnemyDeath;
-
      }
 
      // Metodo para simular el destroy
      public void OnDestroy()
      {
           _enemies.Clear();
+          // Usamos el clone precisamente para evitar destruir el Prefab que es reward y evitar un error en unity
+          MonoBehaviour.Destroy(_rewardClone);
           GameEvents.OnEnemyDeath -= OnEnemyDeath;
      }
 
@@ -103,7 +109,10 @@ public class RoomCombat
                {
                     // TODO: Al morir todos se instancia un cofre, este con su  lógica interna, tal vez un prefab
                     // Tal vez aquí solo sea crear la instancia
-                    Debug.Log("Todos muertos");
+                    if(_reward != null)
+                    {
+                         _rewardClone = MonoBehaviour.Instantiate(_reward, new Vector3(_roomCenter.x, _roomCenter.y, 0), Quaternion.identity);
+                    }
                }
           }
      }

@@ -84,7 +84,7 @@ public class PlayerMovement : MonoBehaviour
           {
               if(_gun != null)
                {
-                    SpriteRenderer sprite = _gun.gameObject.GetComponentInChildren<SpriteRenderer>();
+                    SpriteRenderer sprite = _gun.spriteRenderer;
                     sprite.flipY = true;
                }
               
@@ -94,7 +94,7 @@ public class PlayerMovement : MonoBehaviour
           {
               if (_gun != null)
                {
-                    SpriteRenderer sprite = _gun.gameObject.GetComponentInChildren<SpriteRenderer>();
+                    SpriteRenderer sprite = _gun.spriteRenderer;
                     sprite.flipY = false;
                }  
               transform.rotation = Quaternion.Euler(0, 0, 0);

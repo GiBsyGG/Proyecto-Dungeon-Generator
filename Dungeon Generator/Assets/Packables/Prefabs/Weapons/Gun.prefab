@@ -165,7 +165,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 3
   m_Sprite: {fileID: -353751291, guid: 0d5e657ee5a074e4baa53d5b248a01d2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -235,3 +235,5 @@ MonoBehaviour:
   _msBetweenShots: 500
   _muzzleVelocity: 7
   _burstCount: 3
+  spriteRenderer: {fileID: 2109020352296415871}
+  UIGunIcon: {fileID: -205726582, guid: 354874de70117d94a96cb37b0b173825, type: 3}

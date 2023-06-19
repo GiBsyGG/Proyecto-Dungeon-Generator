@@ -57,6 +57,7 @@ MonoBehaviour:
   _muzzleVelocity: 7
   _burstCount: 3
   spriteRenderer: {fileID: 7941041504797111896}
+  UIGunIcon: {fileID: 0}
 --- !u!1 &1714924189089137176
 GameObject:
   m_ObjectHideFlags: 0
@@ -68,7 +69,7 @@ GameObject:
   - component: {fileID: 1957234134661433906}
   - component: {fileID: 7941041504797111896}
   m_Layer: 0
-  m_Name: Weapon 3
+  m_Name: GunSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -129,7 +130,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 3
   m_Sprite: {fileID: -353751291, guid: 0d5e657ee5a074e4baa53d5b248a01d2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
