@@ -22,14 +22,14 @@ public class GameManager : MonoBehaviour
 
      void Update()
      {
-          //if (Input.GetKeyDown(KeyCode.Space))
-          //{
-          //     HandleGameplay();
-          //}
-          //else if (Input.GetKeyDown(KeyCode.Escape))
-          //{
-          //     HandleMenu();
-          //}
+          if (Input.GetKeyDown(KeyCode.Space))
+          {
+               HandleGameplay();
+          }
+          else if (Input.GetKeyDown(KeyCode.Escape))
+          {
+               HandleMenu();
+          }
      }
 
      public void GameOver()
@@ -40,7 +40,7 @@ public class GameManager : MonoBehaviour
      void HandleMenu()
      {
           Debug.Log("Loading Menu...");
-          SceneManager.LoadScene("Menu");
+          SceneManager.LoadScene("StartMenu");
      }
 
      void HandleGameplay()
@@ -66,7 +66,7 @@ public class GameManager : MonoBehaviour
           //if (GameEvents.OnStartGameEvent!= null)
           //     GameEvents.OnStartGameEvent.Invoke();
 
-          // Otra forma de lo de arriba, esto lo que hace es indicar que este evento sucedió
+          // Otra forma de lo de arriba, esto lo que hace es indicar que este evento sucediï¿½
           // y que los que necesitan saberlo realicen las acciones correspondientes 
           GameEvents.OnStartGameEvent?.Invoke();
      }
