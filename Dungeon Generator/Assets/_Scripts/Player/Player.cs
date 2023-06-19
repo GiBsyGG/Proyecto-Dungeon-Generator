@@ -27,7 +27,8 @@ public class Player : LivingEntity
      protected override void OnTakeDamage()
      {
           base.OnTakeDamage();
-          //TODO: Communicate new health
+          
+          GameEvents.OnPlayerHealthChangeEvent?.Invoke(HealthPoints);
      }
 
      protected override void OnDeath()
@@ -59,6 +60,9 @@ public class Player : LivingEntity
           
           // Apagamos la animacion de muerte
           _bodyAnimator.SetBool("isDeath", false);
+
+          // Indicamos que tiene las vidas de vuelta
+          GameEvents.OnPlayerHealthChangeEvent?.Invoke(HealthPoints);
 
           // Activamos el arma
           _gunController.equippedGun.gameObject.SetActive(true);

@@ -9,8 +9,8 @@ public static class GameEvents
 
      // Game Over -> Points, new max Score, time, level
      // Points Update
-     // PLayer health update
-     // Player Bullets update 
+
+     public static Action<int> OnPlayerHealthChangeEvent; // currentHealth
 
      public static Action<Enemy> OnEnemyDeath;  // Enemy
 }
