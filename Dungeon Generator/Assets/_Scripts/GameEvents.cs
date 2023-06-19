@@ -9,6 +9,7 @@ public static class GameEvents
 
      // Game Over -> Points, new max Score, time, level
      // Points Update
+     // Evento de posible interaccion
 
      public static Action<int> OnPlayerHealthChangeEvent; // currentHealth
 

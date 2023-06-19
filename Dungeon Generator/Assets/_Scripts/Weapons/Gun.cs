@@ -5,7 +5,7 @@ using UnityEngine;
 public class Gun : MonoBehaviour
 { 
     public enum FireMode{Auto, Burst, Single};
-    public enum GunType {ShotGun, MachineGun, Pistol};
+    public enum GunType { ShotGun, MachineGun, Pistol };
 
     [SerializeField]
     public GunType type;

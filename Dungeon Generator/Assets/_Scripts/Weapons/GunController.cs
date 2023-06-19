@@ -43,7 +43,17 @@ public class GunController : MonoBehaviour
          if (equippedGun != null) {
             equippedGun.OnTriggerrRelease();
         }
-
     }
     
+    public void EquipLoot(Gun.GunType gunType)
+    {
+          foreach (Gun gun in allGuns)
+          {
+               if(gun.type == gunType)
+               {
+                    EquipGun(gun);
+               }
+          }
+          // TODO: Comunicar cambio de arma para la interfaz
+    }
 }
