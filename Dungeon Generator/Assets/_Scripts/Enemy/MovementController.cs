@@ -50,6 +50,20 @@ public class MovementController : MonoBehaviour
     
     public void GoToNextWaypoint(){ 
         _changeDir++;
+        if(direcciones.Count < 0)
+        {
+               _currentWaypoint = random.Next(9);
+               direcciones.Add(new Vector2(0, 0));//detener animacion
+               direcciones.Add(new Vector2(0, 1));
+               direcciones.Add(new Vector2(0, -1));
+               direcciones.Add(new Vector2(1, 0));
+               direcciones.Add(new Vector2(-1, 0));//4
+               direcciones.Add(new Vector2(1, 1));
+               direcciones.Add(new Vector2(-1, -1));//6
+               direcciones.Add(new Vector2(1, -1));
+               direcciones.Add(new Vector2(-1, -1));//8
+        }
+
         Vector2 _dir = direcciones[_currentWaypoint];
         _dir.Normalize();
         _rb.velocity = _dir * _speed;

@@ -4,17 +4,23 @@ using UnityEngine;
 
 public class Crosshair : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Awake()
+     private SpriteRenderer spriteRenderer;
+     private void Start()
+     {
+          spriteRenderer = GetComponent<SpriteRenderer>();
+     }
+     // Update is called once per frame
+     void Update()
     {
-        // Apagamos el cursor normal para poner el nuestro
-        Cursor.visible = false;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        Vector2 mouseCursorPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        transform.position = mouseCursorPos;
+        if (GameManager.Instance.gameState == GameState.InGame)
+        {
+             spriteRenderer.enabled = true;
+             Vector2 mouseCursorPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+             transform.position = mouseCursorPos;
+        }
+        else
+        {
+              spriteRenderer.enabled = false;
+        }
     }
 }

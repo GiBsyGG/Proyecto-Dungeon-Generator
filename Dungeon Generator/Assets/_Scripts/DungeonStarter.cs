@@ -12,7 +12,7 @@ public class DungeonStarter : MonoBehaviour
     {
           if (generator != null)
           {
-               generator.GenerateDungeon();
+               //generator.GenerateDungeon();
           }
      }
 }

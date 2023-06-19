@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class Exit : MonoBehaviour, IInteractable
 {
+     [SerializeField]
+     private AbstractDungeonGenerator generator;
+
      public void NextDungeon()
      {
           // Evento para indicar el paso al siguiente dungeon?
-          GameManager.Instance.HandleMenu();
+          GameManager.Instance.HandleNextDungeon();
 
      }
 

@@ -33,8 +33,6 @@ public class CorridorFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
 
      // Gizmos Data
      private List<Color> roomColors = new List<Color>();
-     [SerializeField]
-     private bool showRoomGizmo = false, showCorridorsGizmo;
 
 
      protected override void RunProceduralGeneration()

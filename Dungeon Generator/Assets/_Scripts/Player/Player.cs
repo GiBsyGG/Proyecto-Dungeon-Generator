@@ -54,7 +54,7 @@ public class Player : LivingEntity
 
           if (_bodyAnimator != null)
                _bodyAnimator.SetBool("isDeath", true);
-          
+
           GameManager.Instance.GameOver();
      }
 
