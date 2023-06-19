@@ -49,8 +49,7 @@ public class MovementController : MonoBehaviour
     public void SetSpeed(float speed) => _speed = speed;
     
     public void GoToNextWaypoint(){ 
-        _changeDir++; 
-        
+        _changeDir++;
         Vector2 _dir = direcciones[_currentWaypoint];
         _dir.Normalize();
         _rb.velocity = _dir * _speed;

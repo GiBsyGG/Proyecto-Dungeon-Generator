@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
+    
 
      private void Awake()
      {
@@ -37,16 +38,18 @@ public class GameManager : MonoBehaviour
           Debug.Log("Game over");
      }
 
-     void HandleMenu()
+     public void HandleMenu()
      {
           Debug.Log("Loading Menu...");
           SceneManager.LoadScene("StartMenu");
      }
 
-     void HandleGameplay()
+     public void HandleGameplay()
      {
           Debug.Log("Loading Gameplay...");
-          StartCoroutine(LoadGameplayAsyncScene("Gameplay"));
+          //StartCoroutine(LoadGameplayAsyncScene("Gameplay"));
+          SceneManager.LoadScene("Gameplay");
+          
      }
 
      IEnumerator LoadGameplayAsyncScene(string scene)

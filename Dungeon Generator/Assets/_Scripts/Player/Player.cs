@@ -45,12 +45,15 @@ public class Player : LivingEntity
                playerMovement.enabled = false;
 
           // Detenemos el player
-          _rigidbody.bodyType = RigidbodyType2D.Static;
+          if (_rigidbody != null)
+               _rigidbody.bodyType = RigidbodyType2D.Static;
 
           // Apagamos el arma
-          _gunController.equippedGun.gameObject.SetActive(false);
+          if (_gunController != null)
+               _gunController.equippedGun.gameObject.SetActive(false);
 
-          _bodyAnimator.SetBool("isDeath", true);
+          if (_bodyAnimator != null)
+               _bodyAnimator.SetBool("isDeath", true);
           
           GameManager.Instance.GameOver();
      }
@@ -60,16 +63,19 @@ public class Player : LivingEntity
           InitHealth();
           
           // Apagamos la animacion de muerte
-          _bodyAnimator.SetBool("isDeath", false);
+          if(_bodyAnimator != null)
+               _bodyAnimator.SetBool("isDeath", false);
 
           // Indicamos que tiene las vidas de vuelta
           GameEvents.OnPlayerHealthChangeEvent?.Invoke(HealthPoints);
 
           // Activamos el arma
-          _gunController.equippedGun.gameObject.SetActive(true);
+          if(_gunController != null)
+               _gunController.equippedGun.gameObject.SetActive(true);
 
           // Devolvemos el RB
-          _rigidbody.bodyType = RigidbodyType2D.Dynamic;
+          if (_rigidbody != null)
+               _rigidbody.bodyType = RigidbodyType2D.Dynamic;
 
           // Encendemos los scripts de movimiento y ataque
           this.TryGetComponent<AttackActions>(out AttackActions attackActions);
