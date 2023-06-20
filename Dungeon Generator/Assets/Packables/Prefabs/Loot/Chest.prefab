@@ -124,7 +124,7 @@ MonoBehaviour:
   - {fileID: 1686483909111263629, guid: 937d76a17bab06040842a5af89d2fa6b, type: 3}
   - {fileID: 2243346944006487758, guid: c18a91d39ce95ea4f94f163e6f6ad3a7, type: 3}
   - {fileID: 3604518555396306034, guid: cde311427e542324b9adbf05b17af083, type: 3}
-  _lootAmountDropped: 2
+  _lootAmountDropped: 1
   _lootDuration: 5
   chestOpenSprite: {fileID: 21300000, guid: 4ca37590e524fc548b601e97e2838f66, type: 3}
 --- !u!58 &1148618874116053245

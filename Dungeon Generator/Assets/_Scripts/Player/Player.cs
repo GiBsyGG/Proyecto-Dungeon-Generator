@@ -15,7 +15,7 @@ public class Player : LivingEntity
      private Transform _body;
 
      // Arma del player
-     private GunController _gunController;
+     public GunController _gunController { get; private set; }
 
      void Start()
      {

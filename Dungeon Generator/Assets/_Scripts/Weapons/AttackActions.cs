@@ -30,21 +30,25 @@ public class AttackActions : MonoBehaviour
 
      private void Update()
      {
-          // Shoot Gun
-          if (Input.GetMouseButton(0) && !_isMelee)
+          if(GameManager.Instance.gameState == GameState.InGame)
           {
-              ShootTriggerHold();
-          }
+               // Shoot Gun
+               if (Input.GetMouseButton(0) && !_isMelee)
+               {
+                    ShootTriggerHold();
+               }
 
-          if (Input.GetMouseButtonUp(0) && !_isMelee){
-               
-               ShootTriggerrRelease();
-          }
+               if (Input.GetMouseButtonUp(0) && !_isMelee)
+               {
 
-          // Melee Attack
-          if (Input.GetButtonDown("Fire2") && !_isMelee)
-          {
-               Melee();
+                    ShootTriggerrRelease();
+               }
+
+               // Melee Attack
+               if (Input.GetButtonDown("Fire2") && !_isMelee)
+               {
+                    Melee();
+               }
           }
      }
 

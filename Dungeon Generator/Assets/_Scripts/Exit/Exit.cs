@@ -9,8 +9,8 @@ public class Exit : MonoBehaviour, IInteractable
 
      public void NextDungeon()
      {
-          // Evento para indicar el paso al siguiente dungeon?
-          GameManager.Instance.HandleNextDungeon();
+          // Evento para indicar el paso al siguiente dungeon? De momento no
+          GameManager.Instance.DungeonStart();
 
      }
 

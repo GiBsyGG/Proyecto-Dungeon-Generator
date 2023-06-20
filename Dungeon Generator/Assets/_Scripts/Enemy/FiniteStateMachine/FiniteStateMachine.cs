@@ -31,7 +31,7 @@ public class FiniteStateMachine : MonoBehaviour
           // Asignamos el player a los prefabs enemigos
           if (!_target)
           {
-               _target = GameObject.FindWithTag("Player").transform;
+               _target = GameManager.Instance.player.gameObject.transform;
           }
 
           ToState(_config.InitialState);

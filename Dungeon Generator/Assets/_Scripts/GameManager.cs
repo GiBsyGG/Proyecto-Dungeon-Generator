@@ -24,6 +24,9 @@ public class GameManager : MonoBehaviour
      [SerializeField]
      private AbstractDungeonGenerator generator;
 
+     [SerializeField]
+     public Player player;
+
 
      private void Awake()
      {
@@ -36,29 +39,41 @@ public class GameManager : MonoBehaviour
           {
                Destroy(gameObject);
           }
+     }
 
-          dungeonLevel = 0;
-          menuScreen.SetActive(true);
-          gameState = GameState.InMenu;
+     private void Start()
+     {
+          HandleMenu();
      }
 
      void Update()
      {
-          if (Input.GetKeyDown(KeyCode.Space))
-          {
-               HandleGameplay();
-          }
-          else if (Input.GetKeyDown(KeyCode.Escape))
+          if (Input.GetKeyDown(KeyCode.Escape) && gameState == GameState.InGame)
           {
                HandleMenu();
           }
 
      }
 
+     public void GameStart()
+     {
+          HandleGameplay();
+     }
+
+     public void DungeonStart()
+     {
+          HandleNextDungeon();
+     }
+
+     public void BackToMenu()
+     {
+          HandleMenu();
+     }
+
      public void GameOver()
      {
           Debug.Log("Game over");
-          Instance.dungeonLevel = 0;
+          
           gameState = GameState.InDead;
 
           // Activar el cursor
@@ -66,9 +81,14 @@ public class GameManager : MonoBehaviour
           deadScreen.SetActive(true);
      }
 
-     public void HandleMenu()
+     void HandleMenu()
      {
           Debug.Log("Loading Menu...");
+
+          // Si se regresa al menú se resetea el Dungeon -> Temporal
+          // TODO: Implementar persistencia para nueva partida o continuar uno
+          dungeonLevel = 1;
+          
           //SceneManager.LoadScene("StartMenu");
           menuScreen.SetActive(true);
           deadScreen.SetActive(false);
@@ -78,27 +98,29 @@ public class GameManager : MonoBehaviour
           Cursor.visible = true;
      }
 
-     public void HandleGameplay()
+     void HandleGameplay()
      {
           Debug.Log("Loading Gameplay...");
           //StartCoroutine(LoadGameplayAsyncScene("Gameplay"));
           //SceneManager.LoadScene("Gameplay");
-          menuScreen.SetActive(false);
-          nextDungeonScreen.SetActive(false);
-          deadScreen.SetActive(false);
-          generator.GenerateDungeon();
+
+          // Dar un pequeño tiempo para resetear animaciones y activacion de GameObjects
+          StartCoroutine(LoadGameplay());
+
           gameState = GameState.InGame;
 
           // Desactivar el cursor
           Cursor.visible = false;
      }
 
-     public void HandleNextDungeon()
+     void HandleNextDungeon()
      {
           Debug.Log("Loading Next Dungeon...");
+
           Instance.dungeonLevel += 1;
           //SceneManager.LoadScene("NextDungeon");
           nextDungeonScreen.SetActive(true);
+
           StartCoroutine(LoadNewDungeon());
      }
 
@@ -130,10 +152,25 @@ public class GameManager : MonoBehaviour
           // Wait until the asynchronous scene fully loads
           while (true)
           {
-               yield return new WaitForSeconds(5f);
+               yield return new WaitForSeconds(2f);
                break;
           }
 
           HandleGameplay();
+     }
+
+     IEnumerator LoadGameplay()
+     {
+          generator.GenerateDungeon();
+
+          while (true)
+          {
+               yield return new WaitForSeconds(1f);
+               break;
+          }
+
+          menuScreen.SetActive(false);
+          nextDungeonScreen.SetActive(false);
+          deadScreen.SetActive(false);
      }
 }

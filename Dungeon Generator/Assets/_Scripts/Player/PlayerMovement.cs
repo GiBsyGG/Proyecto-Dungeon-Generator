@@ -42,9 +42,12 @@ public class PlayerMovement : MonoBehaviour
      }
      private void Update()
      {
-          MovePlayer();
-          RotateWeapon();
-          RotateMeleePoint();
+          if(GameManager.Instance.gameState == GameState.InGame)
+          {
+               MovePlayer();
+               RotateWeapon();
+               RotateMeleePoint();
+          }
      }
 
      private void MovePlayer()
