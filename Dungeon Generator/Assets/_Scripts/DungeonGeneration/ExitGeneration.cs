@@ -6,11 +6,11 @@ public static class ExitGeneration
 {
      public static void GenerateExit(Vector2Int initialPosition)
      {
-          // Acceder al objeto player en la jerarquía
-          GameObject ExitObject = GameObject.Find("Exit");
-          if (ExitObject != null)
+          Exit exit = GameManager.Instance.exit;
+          if (exit != null)
           {
-               ExitObject.transform.position = new Vector3(initialPosition.x, initialPosition.y, 0);
+               exit.RestoreExit();
+               exit.transform.position = new Vector3(initialPosition.x, initialPosition.y, 0);
           }
      }
 }

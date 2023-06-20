@@ -15,5 +15,9 @@ public static class GameEvents
 
      public static Action<int> OnPlayerHealthChangeEvent; // currentHealth
 
+     public static Action<int> OnPlayerDeathEvent; // DungeonLevel
+
      public static Action<Enemy> OnEnemyDeath;  // Enemy
+
+     public static Action<int> OnChangeDungeonEvent; // DungeonLevel
 }

@@ -26,6 +26,8 @@ public class GameManager : MonoBehaviour
 
      [SerializeField]
      public Player player;
+     [SerializeField]
+     public Exit exit;
 
 
      private void Awake()
@@ -79,6 +81,7 @@ public class GameManager : MonoBehaviour
           // Activar el cursor
           Cursor.visible = true;
           deadScreen.SetActive(true);
+          GameEvents.OnPlayerDeathEvent?.Invoke(Instance.dungeonLevel);
      }
 
      void HandleMenu()
@@ -92,6 +95,7 @@ public class GameManager : MonoBehaviour
           //SceneManager.LoadScene("StartMenu");
           menuScreen.SetActive(true);
           deadScreen.SetActive(false);
+          nextDungeonScreen.SetActive(false);
           gameState = GameState.InMenu;
 
           // Activar el cursor
@@ -118,8 +122,12 @@ public class GameManager : MonoBehaviour
           Debug.Log("Loading Next Dungeon...");
 
           Instance.dungeonLevel += 1;
+
           //SceneManager.LoadScene("NextDungeon");
           nextDungeonScreen.SetActive(true);
+
+          // Comunicar que se comenzó una mazmorra
+          GameEvents.OnChangeDungeonEvent?.Invoke(Instance.dungeonLevel);
 
           StartCoroutine(LoadNewDungeon());
      }
