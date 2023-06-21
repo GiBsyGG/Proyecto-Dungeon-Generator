@@ -13,7 +13,7 @@ public class NextDungeonScreenUI : MonoBehaviour
 
      private string[] messages = { 
           "Recuerda revisar los cofres al acabar con los zombies", "A veces las salidas son las menos obvias",
-          "Estamos en un ciclo infinito", "Recuerda que tienes atacas a melee",
+          "Estamos en un ciclo infinito", "Recuerda que tienes ataque a melee",
           "Entre mas intentes escapar de tu pasado, mas tendras que bajar",
           "Por que caimos aqui?", "La pala es para enterrar mis esperanzas",
           "No hay salida sin la llave"
