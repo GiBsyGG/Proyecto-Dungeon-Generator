@@ -16,7 +16,7 @@ public class NextDungeonScreenUI : MonoBehaviour
           "Estamos en un ciclo infinito", "Recuerda que tienes atacas a melee",
           "Entre mas intentes escapar de tu pasado, mas tendras que bajar",
           "Por que caimos aqui?", "La pala es para enterrar mis esperanzas",
-          "Busca la llave o no saldras"
+          "No hay salida sin la llave"
           };
 
      void Start()
