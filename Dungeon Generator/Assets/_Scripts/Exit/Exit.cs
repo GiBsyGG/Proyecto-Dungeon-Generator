@@ -5,28 +5,47 @@ using UnityEngine;
 public class Exit : MonoBehaviour, IInteractable
 {
      [SerializeField]
-     private AbstractDungeonGenerator generator;
+     private SpriteRenderer _stairsSprite;
 
      private bool isUsed = false;
 
      public void NextDungeon()
      {
-          // Para solo poder usarla una vez por mazmorra
-          if (!isUsed)
-          {
-               // Evento para indicar el paso al siguiente dungeon? De momento no
-               GameManager.Instance.DungeonStart();
-          }
+          // Evento para indicar el paso al siguiente dungeon? De momento no
+          GameManager.Instance.DungeonStart();
+          
      }
 
      public virtual void Interact(PlayerInteractable player)
      {
-          NextDungeon();
-          isUsed = true;
+          // Para solo poder usarla una vez por mazmorra
+          if (!isUsed)
+          {
+               StartCoroutine(OpenHatchway());
+               // Indicamos que ya se interactuo con ella
+               isUsed = true;
+          }
+
      }
 
      public void RestoreExit()
      {
           isUsed = false;
+     }
+
+     IEnumerator OpenHatchway()
+     {
+          // Para una pequeña animacion abriendo la escotilla
+          _stairsSprite.sortingOrder = 3;
+
+          while (true)
+          {
+               yield return new WaitForSeconds(1f);
+               break;
+          }
+
+          _stairsSprite.sortingOrder = 1;
+
+          NextDungeon();
      }
 }

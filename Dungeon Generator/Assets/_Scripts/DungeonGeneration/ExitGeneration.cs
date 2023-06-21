@@ -14,3 +14,16 @@ public static class ExitGeneration
           }
      }
 }
+
+public class RoomGoal
+{
+     private Vector2Int _roomCenter;
+     private HashSet<Vector2Int> _roomFloor;
+
+     // Metodo para simular el start
+     public RoomGoal(Vector2Int center, HashSet<Vector2Int> floor)
+     {
+          _roomCenter = center;
+          _roomFloor = floor;
+     }
+}

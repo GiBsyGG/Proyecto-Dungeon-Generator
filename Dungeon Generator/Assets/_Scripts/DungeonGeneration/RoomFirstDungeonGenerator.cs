@@ -136,6 +136,9 @@ public class RoomFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
 
                     case "finalRoom":
 
+                         // Sala de salida para calcular donde generar la salida
+                         RoomGoal roomGoal = new RoomGoal(roomCenter, roomFloor);
+
                          //Posicionamos la Salida en el centro de la room mas lejana a la inicial
                          ExitGeneration.GenerateExit(roomCenter);
 
