@@ -11,6 +11,8 @@ public class Chess : MonoBehaviour, IInteractable
      [SerializeField]
      private float _lootDuration = 5f;
      [SerializeField]
+     private bool _disapearLoot = true;
+     [SerializeField]
      private Sprite chestOpenSprite;
   
      private bool open = false;
@@ -26,8 +28,10 @@ public class Chess : MonoBehaviour, IInteractable
                int randomLoot = Random.Range(0, _loots.Length);
                
                _lootDropped = Instantiate(_loots[randomLoot], transform.position + (Vector3)Random.insideUnitCircle, Quaternion.identity);
-               // Inicia lo corrutina para desaparecer el loot
-               StartCoroutine(DestroyLootAfterTime(_lootDropped));
+
+               // Inicia lo corrutina para desaparecer el loot si se debe hacer
+               if(_disapearLoot)
+                    StartCoroutine(DestroyLootAfterTime(_lootDropped));
           }
 
           // Luego de soltar el loot

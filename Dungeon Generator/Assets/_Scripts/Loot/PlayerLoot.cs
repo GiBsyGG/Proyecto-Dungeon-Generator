@@ -27,6 +27,12 @@ public class PlayerLoot : MonoBehaviour
                WeaponLoot weaponLoot = (WeaponLoot)loot;
                ChangeGun(weaponLoot.gunType);
           }
+          else if(loot.type == LootType.Key)
+          {
+               KeyLoot keyLoot = (KeyLoot)loot;
+               keyObtainded();
+
+          }
      }
 
      public void AddLifePoints(int healthLootAmount)
@@ -52,6 +58,17 @@ public class PlayerLoot : MonoBehaviour
           if(_gunController != null)
           {
                _gunController.EquipLoot(gunType);
+          }
+     }
+
+     public void keyObtainded()
+     {
+          if (_player != null)
+          {
+               _player.HaveKey = true;
+
+               // Comunicamos que obtuvo la llave
+               GameEvents.OnPlayerKeyChangeEvent?.Invoke(_player.HaveKey);
           }
      }
 }

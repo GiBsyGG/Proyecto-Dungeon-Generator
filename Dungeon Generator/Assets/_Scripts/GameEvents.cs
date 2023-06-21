@@ -13,6 +13,10 @@ public static class GameEvents
 
      public static Action<Sprite> OnGunChangeEvent;  // New gun Sprite
 
+     public static Action<bool> OnPlayerKeyChangeEvent; // HaveKey
+
+     public static Action<MessageType> OnActiveMessageEvent; // Message to player
+
      public static Action<int> OnPlayerHealthChangeEvent; // currentHealth
 
      public static Action<int> OnPlayerDeathEvent; // DungeonLevel

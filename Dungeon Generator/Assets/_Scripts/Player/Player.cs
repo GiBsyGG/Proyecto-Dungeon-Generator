@@ -17,6 +17,8 @@ public class Player : LivingEntity
      // Arma del player
      public GunController _gunController { get; private set; }
 
+     public bool HaveKey { get; set; }
+
      void Start()
      {
           InitHealth();
@@ -66,8 +68,12 @@ public class Player : LivingEntity
           if(_bodyAnimator != null)
                _bodyAnimator.SetBool("isDeath", false);
 
-          // Indicamos que tiene las vidas de vuelta
+          // Le quitamos la llave
+          HaveKey = false;
+
+          // Indicamos que tiene las vidas de vuelta y que pierde la llave
           GameEvents.OnPlayerHealthChangeEvent?.Invoke(HealthPoints);
+          GameEvents.OnPlayerKeyChangeEvent?.Invoke(HaveKey);
 
           // Activamos el arma
           if(_gunController != null)

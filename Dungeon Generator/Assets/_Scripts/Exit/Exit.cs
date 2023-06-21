@@ -21,9 +21,18 @@ public class Exit : MonoBehaviour, IInteractable
           // Para solo poder usarla una vez por mazmorra
           if (!isUsed)
           {
-               StartCoroutine(OpenHatchway());
-               // Indicamos que ya se interactuo con ella
-               isUsed = true;
+               // Comprobamos que se tenga la llave
+               if (GameManager.Instance.player.HaveKey)
+               {
+                    StartCoroutine(OpenHatchway());
+                    // Indicamos que ya se interactuo con ella
+                    isUsed = true;
+               }
+               else
+               {
+                    GameEvents.OnActiveMessageEvent?.Invoke(MessageType.NoKey);
+               }
+               
           }
 
      }

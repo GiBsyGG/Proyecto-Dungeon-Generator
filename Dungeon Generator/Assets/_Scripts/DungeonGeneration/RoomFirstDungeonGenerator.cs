@@ -43,7 +43,7 @@ public class RoomFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
      private float probCombatRooms = 0.1f;
 
      [SerializeField]
-     private GameObject _reward;
+     private GameObject[] _reward;
 
      // Lista de habitaciones de combate
      List<RoomCombat> combatRooms= new List<RoomCombat>();
@@ -154,12 +154,26 @@ public class RoomFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
                          RoomCombat roomE = new RoomCombat();
 
                          // Este método es para vigilar el evento en cada room
-                         roomE.Start(roomCenter, _reward);
+                         roomE.Start(roomCenter, _reward[0]);
+
                          roomE.SetEnemies(enemies);
                          combatRooms.Add(roomE);
 
                          break;
-            
+
+                    case "keyRoom":
+                         // Lista de instancia de enemigos para destruirlos luegos
+                         List<GameObject> enemiesKey = EnemyGenerator.GenerateEnemys(roomFloor, roomCenter, enemy, percentEnemies);
+
+                         RoomCombat roomKey = new RoomCombat();
+
+                         // Este método es para vigilar el evento en cada room
+                         roomKey.Start(roomCenter, _reward[1]);
+
+                         roomKey.SetEnemies(enemiesKey);
+                         combatRooms.Add(roomKey);
+
+                         break;
 
                }
 
@@ -357,6 +371,9 @@ public class RoomFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
           // Se usa esto para almacenar las rooms con sus posiciones y el tipo de room
           List<object[]> rooms = new List<object[]>();
 
+          // Flag para controlar si ya se creo la sala con llave
+          bool keyroomExist = false;
+
           // Lista de los puntos centrales para distinguir las rooms
           List<Vector2Int> roomCenters = new List<Vector2Int>();
           foreach (var room in roomsList)
@@ -386,6 +403,7 @@ public class RoomFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
                }
 
                // Añado las posiciones, la room y el tipo
+               // Los cuartos no van en secuencia, se generan en orden aleatorio
                if (roomsList[i] == roomsList[0])
                {
                     rooms.Add(new object[] { floor, roomsList[i], "initialRoom" });
@@ -395,12 +413,18 @@ public class RoomFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
                {
                     rooms.Add(new object[] { floor, roomsList[i], "finalRoom" });
                }
+               // Antes de las salas de combate nos aseguramos de generar la llave
+               else if (!keyroomExist)
+               {
+                    rooms.Add(new object[] { floor, roomsList[i], "keyRoom" });
+                    keyroomExist = true;
+               }
                else if (Random.Range(0f, 1f) <= probCombatRooms)
                {
                     // Aquí se puede usar un random y pesos para cambiar a otro tipo de sala y no sea solo de enemigos
                     rooms.Add(new object[] { floor, roomsList[i], "combatRoom" });
                }
-               else 
+               else
                {
                     rooms.Add(new object[] { floor, roomsList[i], "xRoom" });
                }

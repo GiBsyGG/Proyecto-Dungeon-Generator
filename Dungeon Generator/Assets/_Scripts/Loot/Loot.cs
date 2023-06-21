@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum LootType { Weapon, Health }
+public enum LootType { Weapon, Health, Key }
 public class Loot : MonoBehaviour, IInteractable
 {
      public LootType type;
