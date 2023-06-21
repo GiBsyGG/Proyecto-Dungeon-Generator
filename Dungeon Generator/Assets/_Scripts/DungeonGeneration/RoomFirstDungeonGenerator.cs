@@ -323,6 +323,9 @@ public class RoomFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
           // Se usa esto para almacenar las rooms con sus posiciones y el tipo de room
           List<object[]> rooms = new List<object[]>();
 
+          // Flag para controlar si ya se creo la sala con llave
+          bool keyroomExist = false;
+
           // Lista de los puntos centrales para distinguir las rooms
           List<Vector2Int> roomCenters = new List<Vector2Int>();
           foreach (var room in roomsList)
@@ -347,18 +350,30 @@ public class RoomFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
                }
 
                // Añado las posiciones, la room y el tipo
+               // Los cuartos no van en secuencia, se generan en orden aleatorio
                if (room == roomsList[0])
                {
-                    rooms.Add(new object[] {floor, room, "initialRoom"});
+                    rooms.Add(new object[] { floor, room, "initialRoom" });
                }
                // La sala final debe ser la más lejana
-               else if ((Vector2Int)Vector3Int.RoundToInt(room.center) == FindFartherPointTo((Vector2Int)Vector3Int.RoundToInt(roomsList[0].center), roomCenters)) {
-                    rooms.Add(new object[] { floor,room, "finalRoom" });
-               } 
-               else
+               else if ((Vector2Int)Vector3Int.RoundToInt(room.center) == FindFartherPointTo((Vector2Int)Vector3Int.RoundToInt(roomsList[0].center), roomCenters))
+               {
+                    rooms.Add(new object[] { floor, room, "finalRoom" });
+               }
+               // Antes de las salas de combate nos aseguramos de generar la llave
+               else if (!keyroomExist)
+               {
+                    rooms.Add(new object[] { floor, room, "keyRoom" });
+                    keyroomExist = true;
+               }
+               else if (Random.Range(0f, 1f) <= probCombatRooms)
                {
                     // Aquí se puede usar un random y pesos para cambiar a otro tipo de sala y no sea solo de enemigos
                     rooms.Add(new object[] { floor, room, "combatRoom" });
+               }
+               else
+               {
+                    rooms.Add(new object[] { floor, room, "xRoom" });
                }
 
           }

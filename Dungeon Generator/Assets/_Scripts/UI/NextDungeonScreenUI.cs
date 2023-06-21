@@ -12,10 +12,11 @@ public class NextDungeonScreenUI : MonoBehaviour
      private TextMeshProUGUI _dungeonLevelText;
 
      private string[] messages = { 
-          "Recuerda revisar los cofres al acabar con los zombis", "A veces las salidas son las menos obvias",
+          "Recuerda revisar los cofres al acabar con los zombies", "A veces las salidas son las menos obvias",
           "Estamos en un ciclo infinito", "Recuerda que tienes atacas a melee",
           "Entre mas intentes escapar de tu pasado, mas tendras que bajar",
-          "Por que caimos aqui?", "La pala es para enterrar mis esperanzas"
+          "Por que caimos aqui?", "La pala es para enterrar mis esperanzas",
+          "Busca la llave o no saldras"
           };
 
      void Start()
