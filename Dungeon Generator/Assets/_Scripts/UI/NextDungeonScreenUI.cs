@@ -12,15 +12,14 @@ public class NextDungeonScreenUI : MonoBehaviour
      private TextMeshProUGUI _dungeonLevelText;
 
      private string[] messages = { 
-          "¿Eran zombies o estudiantes?", "Sobreviví... por desgracia.",
-          "Esto no acaba nunca, como mi carrera", "La pala es para enterrar mis sueños",
+          "Eran zombies o estudiantes?", "Sobrevivi... por desgracia.",
+          "Esto no acaba nunca, como mi carrera", "La pala es para enterrar mis esperanzas",
           "Esta pantalla de carga es mentira, igual que sus palabras",
-          "Ojalá hubiera motivación looteable en los cofres"
+          "Ojala hubiera motivacion looteable en los cofres"
           };
 
      void Start()
      {
-          Debug.Log(_dungeonMessageText.text);
           GameEvents.OnChangeDungeonEvent += OnStartNewDungeon;
      }
 
@@ -31,7 +30,6 @@ public class NextDungeonScreenUI : MonoBehaviour
 
      private void OnStartNewDungeon(int dungeonLevel)
      {
-          Debug.Log(dungeonLevel);
           _dungeonMessageText.text = messages[Random.Range(0, messages.Length)];
           _dungeonLevelText.text = $"Siguiente Dungeon: {dungeonLevel}";
      }

@@ -73,9 +73,7 @@ public class GameManager : MonoBehaviour
      }
 
      public void GameOver()
-     {
-          Debug.Log("Game over");
-          
+     {    
           gameState = GameState.InDead;
 
           // Activar el cursor
@@ -86,7 +84,6 @@ public class GameManager : MonoBehaviour
 
      void HandleMenu()
      {
-          Debug.Log("Loading Menu...");
 
           // Si se regresa al menú se resetea el Dungeon -> Temporal
           // TODO: Implementar persistencia para nueva partida o continuar uno
@@ -104,7 +101,6 @@ public class GameManager : MonoBehaviour
 
      void HandleGameplay()
      {
-          Debug.Log("Loading Gameplay...");
           //StartCoroutine(LoadGameplayAsyncScene("Gameplay"));
           //SceneManager.LoadScene("Gameplay");
 
@@ -119,8 +115,6 @@ public class GameManager : MonoBehaviour
 
      void HandleNextDungeon()
      {
-          Debug.Log("Loading Next Dungeon...");
-
           Instance.dungeonLevel += 1;
 
           //SceneManager.LoadScene("NextDungeon");
