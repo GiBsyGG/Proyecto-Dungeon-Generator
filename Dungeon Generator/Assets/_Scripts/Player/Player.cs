@@ -25,6 +25,13 @@ public class Player : LivingEntity
           _bodyAnimator = _body.GetComponent<Animator>();
           _rigidbody = GetComponent<Rigidbody2D>();
           _gunController = GetComponent<GunController>();
+
+          GameEvents.OnBackToMenuEvent += OnInitialState;
+     }
+
+     private void OnDestroy()
+     {
+          GameEvents.OnBackToMenuEvent -= OnInitialState;
      }
 
      protected override void OnTakeDamage()
@@ -88,5 +95,12 @@ public class Player : LivingEntity
           attackActions.enabled = true;
           this.TryGetComponent<PlayerMovement>(out PlayerMovement playerMovement);
           playerMovement.enabled = true;
+     }
+
+     public void OnInitialState()
+     {
+          // Reseteamos la vida y el arma
+          InitHealth();
+          _gunController.EquipInitialGun();
      }
 }

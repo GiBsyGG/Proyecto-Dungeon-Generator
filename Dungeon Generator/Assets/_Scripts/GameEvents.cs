@@ -7,6 +7,8 @@ public static class GameEvents
 {
      public static Action OnStartGameEvent;
 
+     public static Action OnBackToMenuEvent;
+
      // Game Over -> Points, new max Score, time, level
      // Points Update
      // Evento de posible interaccion? aun no necesario para el cambio de icono, tal vez para otra cosa

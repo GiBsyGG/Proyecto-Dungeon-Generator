@@ -30,12 +30,10 @@ public class HUDKeyObtained : MonoBehaviour
           {
                if (showKey)
                {
-                    Debug.Log("Obtuve la llave");
                     _key.color = Color.white;
                }
                else
                {
-                    Debug.Log("Perdí la llave");
                     _key.color = new Color(0.25f,0.25f,0.25f);
                }
           }

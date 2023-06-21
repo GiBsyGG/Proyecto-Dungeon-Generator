@@ -20,12 +20,15 @@ public class GunController : MonoBehaviour
         if (equippedGun != null) {
             Destroy(equippedGun.gameObject);
         }
-        equippedGun = Instantiate(allGuns[gunIndex],WeaponHold.position,WeaponHold.rotation) as Gun;
-        equippedGun.transform.parent =WeaponHold;
+          if (allGuns.Length > 0)
+          {
+               equippedGun = Instantiate(allGuns[gunIndex], WeaponHold.position, WeaponHold.rotation) as Gun;
+               equippedGun.transform.parent = WeaponHold;
+          }
 
-        // Comunicar cambio de arma para la interfaz
-        //Debug.Log(equippedGun.UIGunIcon);
-        GameEvents.OnGunChangeEvent?.Invoke(equippedGun.UIGunIcon);
+          // Comunicar cambio de arma para la interfaz
+          //Debug.Log(equippedGun.UIGunIcon);
+          GameEvents.OnGunChangeEvent?.Invoke(equippedGun.UIGunIcon);
 
     }
 
@@ -38,6 +41,21 @@ public class GunController : MonoBehaviour
 
         // Comunicar cambio de arma para la interfaz
         GameEvents.OnGunChangeEvent?.Invoke(equippedGun.UIGunIcon);
+     }
+
+     public void EquipInitialGun()
+     {
+          if (equippedGun != null)
+          {
+               Destroy(equippedGun.gameObject);
+          }
+          if (allGuns.Length > 0)
+          {
+               equippedGun = Instantiate(allGuns[0], WeaponHold.position, WeaponHold.rotation) as Gun;
+               equippedGun.transform.parent = WeaponHold;
+          }
+          // Comunicar cambio de arma para la interfaz
+          GameEvents.OnGunChangeEvent?.Invoke(equippedGun.UIGunIcon);
      }
     
     public void OnTriggerHold(){

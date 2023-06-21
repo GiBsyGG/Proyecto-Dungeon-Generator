@@ -88,7 +88,10 @@ public class GameManager : MonoBehaviour
           // Si se regresa al menú se resetea el Dungeon -> Temporal
           // TODO: Implementar persistencia para nueva partida o continuar uno
           dungeonLevel = 1;
-          
+
+          // Comunicar que se recomienzan las mazmorras
+          GameEvents.OnChangeDungeonEvent?.Invoke(Instance.dungeonLevel);
+
           //SceneManager.LoadScene("StartMenu");
           menuScreen.SetActive(true);
           deadScreen.SetActive(false);
@@ -97,6 +100,9 @@ public class GameManager : MonoBehaviour
 
           // Activar el cursor
           Cursor.visible = true;
+
+          GameEvents.OnBackToMenuEvent?.Invoke();
+
      }
 
      void HandleGameplay()
