@@ -410,7 +410,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Moriste en la mazmorra:'
+  m_text: 'You died in the miserable round:'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 05dbbec2864762842aa2c2926ce056a4, type: 2}
   m_sharedMaterial: {fileID: -8746879316753065892, guid: 05dbbec2864762842aa2c2926ce056a4, type: 2}
@@ -21073,7 +21073,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Es tu fin
+  m_text: Is this your end?
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 864235292a65ef7418bdd85d35b8241f, type: 2}
   m_sharedMaterial: {fileID: 4426498269233939621, guid: 864235292a65ef7418bdd85d35b8241f, type: 2}
@@ -21767,7 +21767,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Catazomb
+  m_text: dead's loot
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 20d8415df9800c449a4d509340502915, type: 2}
   m_sharedMaterial: {fileID: 6434326235227871520, guid: 20d8415df9800c449a4d509340502915, type: 2}

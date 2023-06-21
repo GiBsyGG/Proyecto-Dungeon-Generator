@@ -12,10 +12,10 @@ public class NextDungeonScreenUI : MonoBehaviour
      private TextMeshProUGUI _dungeonLevelText;
 
      private string[] messages = { 
-          "Eran zombies o estudiantes?", "Sobrevivi... por desgracia.",
-          "Esto no acaba nunca, como mi carrera", "La pala es para enterrar mis esperanzas",
-          "Esta pantalla de carga es mentira, igual que sus palabras",
-          "Ojala hubiera motivacion looteable en los cofres"
+          "Recuerda revisar los cofres al acabar con los zombis", "A veces las salidas son las menos obvias",
+          "Estamos en un ciclo infinito", "Recuerda que tienes atacas a melee",
+          "Entre mas intentes escapar de tu pasado, mas tendras que bajar",
+          "Por que caimos aqui?", "La pala es para enterrar mis esperanzas"
           };
 
      void Start()
