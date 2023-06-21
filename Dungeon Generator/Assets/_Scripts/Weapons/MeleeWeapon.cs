@@ -20,7 +20,7 @@ public class MeleeWeapon : MonoBehaviour
      {
           if (collision.transform.TryGetComponent(out IDamageable targetHit))
           {
-               targetHit.TakeHit();
+               targetHit.TakeHit(5);
           }
      }
 }

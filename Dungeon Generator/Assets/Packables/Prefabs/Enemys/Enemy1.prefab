@@ -156,7 +156,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91d78ce6fe52a6a429da7b34a02a5802, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Health: 2
+  Health: 3
   Speed: 3
   ChaseSpeed: 3
   DetectionRange: 5
@@ -246,7 +246,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffbdd90f2c8af5d4ba4d9dc2f9a4da60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <TotalHealthPoints>k__BackingField: 1
+  <TotalHealthPoints>k__BackingField: 2
 --- !u!61 &4287563746963606162
 BoxCollider2D:
   m_ObjectHideFlags: 0
