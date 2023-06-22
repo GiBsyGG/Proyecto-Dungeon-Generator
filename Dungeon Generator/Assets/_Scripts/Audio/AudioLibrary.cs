@@ -9,7 +9,7 @@ public class AudioLibrary : ScriptableObject
 }
 
 
-public enum AudioMusicType { Menu, Gameplay, Load, End }
+public enum AudioMusicType { Menu, Gameplay, Load, End, Alter }
 
 [Serializable]
 public class AudioMusicClip

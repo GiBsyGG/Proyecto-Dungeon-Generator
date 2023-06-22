@@ -21,6 +21,8 @@ MonoBehaviour:
     Clip: {fileID: 8300000, guid: afd9084b46592e04fa9ff3e8bc27012f, type: 3}
   - MusicType: 3
     Clip: {fileID: 8300000, guid: b9a39e94a10a31444a2332fff892e656, type: 3}
+  - MusicType: 4
+    Clip: {fileID: 8300000, guid: 03af11e1a7cbc554cacb3a5b45bc453c, type: 3}
   soundGroups:
   - groupID: PlayerDamaged
     clips:

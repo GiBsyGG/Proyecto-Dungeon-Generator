@@ -1,27 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class MenuScreenUI : MonoBehaviour
 {
      [SerializeField]
-     private Button _startButton;
+     private Button[] _startButton;
      [SerializeField]
-     private Button _controlsButton;
+     private Button[] _controlsButton;
      [SerializeField]
-     private GameObject _controlsPanel;
+     private GameObject[] _controlsPanel;
 
      private bool _controlsOnScreen = false;
 
      private void Start()
      {
-
-          // Apagamos el panel de los controles por defecto
-          _controlsPanel.SetActive(false);
-
-          _startButton.onClick.AddListener(OnStartButtonClicked);
-          _controlsButton.onClick.AddListener(OnToggleControls);
+          for (int i = 0; i < _startButton.Length; i++)
+          {    // Apagamos el panel de los controles por defecto
+               _controlsPanel[i].SetActive(false);
+               _startButton[i].onClick.AddListener(OnStartButtonClicked);
+               _controlsButton[i].onClick.AddListener(OnToggleControls);
+          }
      }
 
      public void OnStartButtonClicked()
@@ -56,13 +57,19 @@ public class MenuScreenUI : MonoBehaviour
 
      public void OffControlsPanel()
      {
-          _controlsPanel.SetActive(false);
-          _controlsOnScreen = false;
+          for (int i = 0; i < _controlsPanel.Length; i++)
+          {    
+               _controlsPanel[i].SetActive(false);
+               _controlsOnScreen = false;
+          }
      }
 
      public void ShowControlsPanel()
      {
-          _controlsPanel.SetActive(true);
-          _controlsOnScreen = true;
+          for (int i = 0; i < _controlsPanel.Length; i++)
+          {
+               _controlsPanel[i].SetActive(true);
+               _controlsOnScreen = true;
+          }
      }
 }

@@ -14,6 +14,8 @@ public class GameManager : MonoBehaviour
 
      [SerializeField]
      private GameObject menuScreen;
+     [SerializeField]
+     private GameObject menuScreenAlter;
 
      [SerializeField]
      private GameObject nextDungeonScreen;
@@ -89,7 +91,6 @@ public class GameManager : MonoBehaviour
 
      void HandleMenu()
      {
-
           // Si se regresa al menú se resetea el Dungeon -> Temporal
           // TODO: Implementar persistencia para nueva partida o continuar uno
           dungeonLevel = 1;
@@ -99,6 +100,7 @@ public class GameManager : MonoBehaviour
 
           //SceneManager.LoadScene("StartMenu");
           menuScreen.SetActive(true);
+          menuScreenAlter.SetActive(false);
           deadScreen.SetActive(false);
           nextDungeonScreen.SetActive(false);
           gameState = GameState.InMenu;
@@ -110,6 +112,7 @@ public class GameManager : MonoBehaviour
           
           AudioManager.Instance.PlayMusic(AudioMusicType.Menu);
 
+          StartCoroutine(LoadAlterMenu());
      }
 
      void HandleGameplay()
@@ -187,6 +190,7 @@ public class GameManager : MonoBehaviour
 
           generator.GenerateDungeon();
           menuScreen.SetActive(false);
+          menuScreenAlter.SetActive(false);
           nextDungeonScreen.SetActive(false);
           deadScreen.SetActive(false);
 
@@ -204,7 +208,24 @@ public class GameManager : MonoBehaviour
           }
 
           menuScreen.SetActive(false);
+          menuScreenAlter.SetActive(false);
           nextDungeonScreen.SetActive(false);
           deadScreen.SetActive(false);
+     }
+
+     IEnumerator LoadAlterMenu()
+     {
+          while(true)
+          {
+               yield return new WaitForSeconds(12f);
+               break;
+          }
+          if(gameState == GameState.InMenu)
+          {
+               menuScreen.SetActive(false);
+               menuScreenAlter.SetActive(true);
+               AudioManager.Instance.PlayMusic(AudioMusicType.Alter, 0.25f);
+          }
+          
      }
 }
