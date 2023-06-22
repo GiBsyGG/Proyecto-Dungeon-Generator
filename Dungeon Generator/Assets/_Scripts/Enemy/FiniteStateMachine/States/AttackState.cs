@@ -46,7 +46,7 @@ public class AttackState : State
         // No siempre queremos que suene el zombie
         if (GameManager.Instance.gameState == GameState.InGame)
           {
-               if (Random.Range(0f, 1f) <= 0.5)
+               if (Random.Range(0f, 1f) <= 0.7)
                     AudioManager.Instance.PlaySound2D("Zombie");
           }
                

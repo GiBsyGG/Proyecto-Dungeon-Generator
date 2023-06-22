@@ -46,8 +46,8 @@ public class GameManager : MonoBehaviour
      private void Start()
      {
           // Bajamos el volumen de los efectos
-          AudioManager.Instance.SetVolume(0.05f, AudioChannel.Sfx);
-          AudioManager.Instance.SetVolume(1f, AudioChannel.Music);
+          AudioManager.Instance.SetVolume(0.08f, AudioChannel.Sfx);
+          AudioManager.Instance.SetVolume(0.6f, AudioChannel.Music);
           HandleMenu();
      }
 
@@ -173,12 +173,14 @@ public class GameManager : MonoBehaviour
           // Wait until the asynchronous scene fully loads
           while (true)
           {
-               yield return new WaitForSeconds(2f);
+               yield return new WaitForSeconds(3f);
                break;
           }
 
           // Se inicia un nuevo estado de juego pero sin revivir a l player
           gameState = GameState.InGame;
+
+          AudioManager.Instance.PlayMusic(AudioMusicType.Gameplay);
 
           // Desactivar el cursor
           Cursor.visible = false;

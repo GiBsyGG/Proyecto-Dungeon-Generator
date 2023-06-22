@@ -126,6 +126,7 @@ public class Player : LivingEntity
      public void OnNewDungeon()
      {
           HaveKey = false;
+          GameEvents.OnPlayerKeyChangeEvent?.Invoke(HaveKey);
      }
 
      // Corrutina para evitar que se rompa el sonido al sonar de seguido
