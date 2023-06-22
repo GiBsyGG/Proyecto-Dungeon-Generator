@@ -36,11 +36,13 @@ public class AudioManager : MonoBehaviour
                Instance = this;
                DontDestroyOnLoad(gameObject);
           }
+
+          Init();
      }
 
      private void Start()
      {
-          Init();
+          //Init();
      }
 
      public void Init()
@@ -116,6 +118,7 @@ public class AudioManager : MonoBehaviour
      public void PlayMusic(AudioMusicType type, float fadeDuration = 1)
      {
           activeMusicSourceIndex = 1 - activeMusicSourceIndex;
+          
           musicSources[activeMusicSourceIndex].clip = GetClipForMusic(type);
           musicSources[activeMusicSourceIndex].Play();
 
