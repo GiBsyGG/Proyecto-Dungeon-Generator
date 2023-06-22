@@ -54,7 +54,7 @@ MonoBehaviour:
   - {fileID: 4185729280770144119}
   _projectile: {fileID: 7961499794655890127, guid: 5b689a1377952524a9998332e6c3ffab, type: 3}
   _msBetweenShots: 200
-  _muzzleVelocity: 7
+  _muzzleVelocity: 8.5
   _burstCount: 3
   spriteRenderer: {fileID: 7941041504797111896}
   UIGunIcon: {fileID: -205726582, guid: 354874de70117d94a96cb37b0b173825, type: 3}

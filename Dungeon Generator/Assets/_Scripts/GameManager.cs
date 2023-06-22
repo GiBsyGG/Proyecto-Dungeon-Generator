@@ -217,7 +217,7 @@ public class GameManager : MonoBehaviour
      {
           while(true)
           {
-               yield return new WaitForSeconds(12f);
+               yield return new WaitForSeconds(60f);
                break;
           }
           if(gameState == GameState.InMenu)
