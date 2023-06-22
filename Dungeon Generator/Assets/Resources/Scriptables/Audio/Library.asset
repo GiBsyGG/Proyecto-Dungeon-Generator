@@ -65,3 +65,7 @@ MonoBehaviour:
   - groupID: Step
     clips:
     - {fileID: 8300000, guid: c3619f23a82ab1d4eafae4912fa4a8cd, type: 3}
+  - groupID: Zombie
+    clips:
+    - {fileID: 8300000, guid: 291444bdda7de0343a13a39c37510d65, type: 3}
+    - {fileID: 8300000, guid: f78ea70f2d6166d44966e40dc1f139c5, type: 3}
