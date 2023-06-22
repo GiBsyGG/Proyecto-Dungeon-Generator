@@ -84,7 +84,7 @@ public class GameManager : MonoBehaviour
           deadScreen.SetActive(true);
           GameEvents.OnPlayerDeathEvent?.Invoke(Instance.dungeonLevel);
 
-          AudioManager.Instance.PlaySound2D("PlayerDead");
+          AudioManager.Instance.PlayMusic(AudioMusicType.End);
      }
 
      void HandleMenu()
@@ -140,7 +140,7 @@ public class GameManager : MonoBehaviour
           // Comunicar que se comenzó una mazmorra
           GameEvents.OnChangeDungeonEvent?.Invoke(Instance.dungeonLevel);
 
-          AudioManager.Instance.PlaySound2D("LoadScreen");
+          AudioManager.Instance.PlayMusic(AudioMusicType.Load);
 
           StartCoroutine(LoadNewDungeon());
      }

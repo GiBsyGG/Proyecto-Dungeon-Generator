@@ -13,19 +13,18 @@ MonoBehaviour:
   m_Name: Library
   m_EditorClassIdentifier: 
   music:
-  - MusicType: 3
-    Clip: {fileID: 8300000, guid: afd9084b46592e04fa9ff3e8bc27012f, type: 3}
+  - MusicType: 2
+    Clip: {fileID: 8300000, guid: f1b6a5d8f29f16e488d176fe53b5d3ff, type: 3}
   - MusicType: 1
     Clip: {fileID: 8300000, guid: 7664e6855fe301146b38602f88bc08bb, type: 3}
   - MusicType: 0
     Clip: {fileID: 8300000, guid: afd9084b46592e04fa9ff3e8bc27012f, type: 3}
+  - MusicType: 3
+    Clip: {fileID: 8300000, guid: b9a39e94a10a31444a2332fff892e656, type: 3}
   soundGroups:
   - groupID: PlayerDamaged
     clips:
     - {fileID: 8300000, guid: 121038befa6e00a4a939616e90cf62a9, type: 3}
-  - groupID: PlayerDead
-    clips:
-    - {fileID: 8300000, guid: b9a39e94a10a31444a2332fff892e656, type: 3}
   - groupID: PlayerHealed
     clips:
     - {fileID: 8300000, guid: 8e2db3a6f4fb39849b33d3ac13f2f7b1, type: 3}
@@ -62,9 +61,6 @@ MonoBehaviour:
   - groupID: InteractWeaponLoot
     clips:
     - {fileID: 8300000, guid: 15db94d8df5b75b42bc1afd7216faa88, type: 3}
-  - groupID: LoadScreen
-    clips:
-    - {fileID: 8300000, guid: f1b6a5d8f29f16e488d176fe53b5d3ff, type: 3}
   - groupID: ButtonPressed
     clips:
     - {fileID: 8300000, guid: 1a1182d4e7414cf48bf35218372fbd43, type: 3}
