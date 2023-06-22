@@ -123,6 +123,11 @@ public class Player : LivingEntity
           _gunController.EquipInitialGun();
      }
 
+     public void OnNewDungeon()
+     {
+          HaveKey = false;
+     }
+
      // Corrutina para evitar que se rompa el sonido al sonar de seguido
      IEnumerator PlayAlmostDead()
      {

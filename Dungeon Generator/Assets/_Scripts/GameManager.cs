@@ -170,12 +170,23 @@ public class GameManager : MonoBehaviour
                break;
           }
 
-          HandleGameplay();
+          // Se inicia un nuevo estado de juego pero sin revivir a l player
+          gameState = GameState.InGame;
+
+          // Desactivar el cursor
+          Cursor.visible = false;
+
+          generator.GenerateDungeon();
+          menuScreen.SetActive(false);
+          nextDungeonScreen.SetActive(false);
+          deadScreen.SetActive(false);
+
      }
 
      IEnumerator LoadGameplay()
      {
           generator.GenerateDungeon();
+          player.OnRevive();
 
           while (true)
           {

@@ -10,7 +10,7 @@ public static class PlayerGeneration
           Player player = GameManager.Instance.player;
           if (player != null)
           {
-               player.OnRevive();
+               player.OnNewDungeon();
                
                player.gameObject.transform.position = new Vector3(initialPosition.x, initialPosition.y, 0);
           }
