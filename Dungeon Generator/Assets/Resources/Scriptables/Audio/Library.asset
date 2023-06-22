@@ -13,10 +13,12 @@ MonoBehaviour:
   m_Name: Library
   m_EditorClassIdentifier: 
   music:
-  - MusicType: 0
+  - MusicType: 3
     Clip: {fileID: 8300000, guid: afd9084b46592e04fa9ff3e8bc27012f, type: 3}
   - MusicType: 1
     Clip: {fileID: 8300000, guid: 7664e6855fe301146b38602f88bc08bb, type: 3}
+  - MusicType: 0
+    Clip: {fileID: 8300000, guid: afd9084b46592e04fa9ff3e8bc27012f, type: 3}
   soundGroups:
   - groupID: PlayerDamaged
     clips:
