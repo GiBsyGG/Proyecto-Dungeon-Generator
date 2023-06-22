@@ -15465,8 +15465,8 @@ MonoBehaviour:
   offset: 2
   ramdomWalkRooms: 1
   enemy: {fileID: 633519134553127519, guid: 0ce6132daf8137844b1040e6c9c25330, type: 3}
-  percentEnemies: 0.3
-  probCombatRooms: 0.5
+  percentEnemies: 0.5
+  probCombatRooms: 0.6
   _reward:
   - {fileID: 1039563612261233870, guid: a5cec0d82dc446b45b29904bc9b33266, type: 3}
   - {fileID: 4063136081419311804, guid: 5ecc9e8e47f3d9f40bd76538acef3a60, type: 3}
@@ -24330,7 +24330,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e614f5455b5e0e41a17529b83c72b74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  speed: 7
   _body: {fileID: 367367464}
   _weapon: {fileID: 1594539592}
   _meleePoint: {fileID: 2145350838}
