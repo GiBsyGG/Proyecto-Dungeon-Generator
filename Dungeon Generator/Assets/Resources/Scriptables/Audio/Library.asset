@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 230e181c6f7b66c45902e7753aa26ee5, type: 3}
+  m_Name: Library
+  m_EditorClassIdentifier: 
+  music: []
+  soundGroups:
+  - groupID: PlayerDamaged
+    clips:
+    - {fileID: 8300000, guid: 121038befa6e00a4a939616e90cf62a9, type: 3}
+  - groupID: PlayerDead
+    clips:
+    - {fileID: 8300000, guid: b9a39e94a10a31444a2332fff892e656, type: 3}
+  - groupID: PlayerHealed
+    clips:
+    - {fileID: 8300000, guid: 8e2db3a6f4fb39849b33d3ac13f2f7b1, type: 3}
+  - groupID: PlayerAlmostDead
+    clips:
+    - {fileID: 8300000, guid: 885e9121d6d56314c8460c070e021558, type: 3}
+  - groupID: AttackMelee
+    clips:
+    - {fileID: 8300000, guid: b7c24f67fd419e84d876517b5d69534c, type: 3}
+  - groupID: NoHitMelee
+    clips:
+    - {fileID: 8300000, guid: fbd710124d8d1b0498b2468dad57addc, type: 3}
+  - groupID: AttackShotgun
+    clips:
+    - {fileID: 8300000, guid: accdba2a447f10d438e6503c8a243130, type: 3}
+  - groupID: AttackPistol
+    clips:
+    - {fileID: 8300000, guid: bd014536db3b8044ebab8e64b0e647c4, type: 3}
+  - groupID: AttackMachinegun
+    clips:
+    - {fileID: 8300000, guid: 45809438e12d6514999e626577cbaaf6, type: 3}
+  - groupID: InteractChest
+    clips:
+    - {fileID: 8300000, guid: 221092b8fd210a54daf73e5c3ff39c61, type: 3}
+  - groupID: InteractOpenDoor
+    clips:
+    - {fileID: 8300000, guid: 4211a5983183c594686d8dc46253411f, type: 3}
+  - groupID: InteractCloseDoor
+    clips:
+    - {fileID: 8300000, guid: 4ebb63dce71cfec4aa826892daa3b6e2, type: 3}
+  - groupID: InteractKeyLoot
+    clips:
+    - {fileID: 8300000, guid: f83a9544643c42d48bf7cf3ebe766516, type: 3}
+  - groupID: InteractWeaponLoot
+    clips:
+    - {fileID: 8300000, guid: 15db94d8df5b75b42bc1afd7216faa88, type: 3}
+  - groupID: LoadScreen
+    clips:
+    - {fileID: 8300000, guid: f1b6a5d8f29f16e488d176fe53b5d3ff, type: 3}
+  - groupID: ButtonPressed
+    clips:
+    - {fileID: 8300000, guid: 1a1182d4e7414cf48bf35218372fbd43, type: 3}
+  - groupID: Step
+    clips:
+    - {fileID: 8300000, guid: c3619f23a82ab1d4eafae4912fa4a8cd, type: 3}

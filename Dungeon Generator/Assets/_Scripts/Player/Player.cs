@@ -18,6 +18,8 @@ public class Player : LivingEntity
 
      public bool HaveKey { get; set; }
 
+     private bool _almostDeadSound;
+
      void Start()
      {
           InitHealth();
@@ -33,37 +35,55 @@ public class Player : LivingEntity
           GameEvents.OnBackToMenuEvent -= OnInitialState;
      }
 
+     private void FixedUpdate()
+     {
+          if (GameManager.Instance.gameState == GameState.InGame)
+          {
+               if (HealthPoints <= 2 && !_almostDeadSound)
+                    StartCoroutine(PlayAlmostDead());
+          }
+     }
+
      protected override void OnTakeDamage()
      {
-          base.OnTakeDamage();
+          if(GameManager.Instance.gameState == GameState.InGame)
+          {
+               base.OnTakeDamage();
+
+               GameEvents.OnPlayerHealthChangeEvent?.Invoke(HealthPoints);
+
+               AudioManager.Instance.PlaySound2D("PlayerDamaged");
+          }
           
-          GameEvents.OnPlayerHealthChangeEvent?.Invoke(HealthPoints);
      }
 
      protected override void OnDeath()
      {
-          base.OnDeath();
+          if (GameManager.Instance.gameState == GameState.InGame)
+          {
+               base.OnDeath();
 
-          // Apagamos los scripts de movimiento y ataque
-          this.TryGetComponent<AttackActions>(out AttackActions attackActions);
-          if (attackActions != null)
-               attackActions.enabled = false;
-          this.TryGetComponent<PlayerMovement>(out PlayerMovement playerMovement);
-          if (playerMovement!= null)
-               playerMovement.enabled = false;
+               // Apagamos los scripts de movimiento y ataque
+               this.TryGetComponent<AttackActions>(out AttackActions attackActions);
+               if (attackActions != null)
+                    attackActions.enabled = false;
+               this.TryGetComponent<PlayerMovement>(out PlayerMovement playerMovement);
+               if (playerMovement != null)
+                    playerMovement.enabled = false;
 
-          // Detenemos el player
-          if (_rigidbody != null)
-               _rigidbody.bodyType = RigidbodyType2D.Static;
+               // Detenemos el player
+               if (_rigidbody != null)
+                    _rigidbody.bodyType = RigidbodyType2D.Static;
 
-          // Apagamos el arma
-          if (_gunController != null)
-               _gunController.equippedGun.gameObject.SetActive(false);
+               // Apagamos el arma
+               if (_gunController != null)
+                    _gunController.equippedGun.gameObject.SetActive(false);
 
-          if (_bodyAnimator != null)
-               _bodyAnimator.SetBool("isDeath", true);
+               if (_bodyAnimator != null)
+                    _bodyAnimator.SetBool("isDeath", true);
 
-          GameManager.Instance.GameOver();
+               GameManager.Instance.GameOver();
+          }
      }
 
      public void OnRevive()
@@ -101,5 +121,20 @@ public class Player : LivingEntity
           // Reseteamos la vida y el arma
           InitHealth();
           _gunController.EquipInitialGun();
+     }
+
+     // Corrutina para evitar que se rompa el sonido al sonar de seguido
+     IEnumerator PlayAlmostDead()
+     {
+          AudioManager.Instance.PlaySound2D("PlayerAlmostDead");
+          _almostDeadSound = true;
+
+          while (true)
+          {
+               yield return new WaitForSeconds(3f);
+               break;
+          }
+
+          _almostDeadSound = false;
      }
 }

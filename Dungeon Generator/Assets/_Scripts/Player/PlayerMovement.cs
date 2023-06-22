@@ -32,6 +32,9 @@ public class PlayerMovement : MonoBehaviour
      [SerializeField]
      private Transform _meleePoint;
 
+     // Flag para el sonido
+     private bool _stepsSound = false;
+
      private void Start()
      {
 
@@ -63,6 +66,13 @@ public class PlayerMovement : MonoBehaviour
           // Cambiar el estado de movimiento para el animator si se mueve
           if (_dir.x != 0 || _dir.y != 0) {
                _bodyAnimator.SetBool("isMoving", true);
+
+               // Sonido de pasos
+               if (!_stepsSound)
+               {
+                    StartCoroutine(PlayStepsSound());
+               }
+               
           } else
           {
                _bodyAnimator.SetBool("isMoving", false);
@@ -119,6 +129,20 @@ public class PlayerMovement : MonoBehaviour
 
           // Acercamiento del arma a la direccion del mouse
           _meleePoint.position = transform.position - (new Vector3(0f, 0.2f, 0f)) + aimVector * 0.2f;
+     }
+
+     // Corrutina para evitar que se rompa el sonido al sonar de seguido
+     IEnumerator PlayStepsSound()
+     {
+          AudioManager.Instance.PlaySound2D("Step");
+          _stepsSound = true;
+
+          while (true)
+          {
+               yield return new WaitForSeconds(0.25f);
+               break;
+          }
+          _stepsSound = false;
      }
 
 }

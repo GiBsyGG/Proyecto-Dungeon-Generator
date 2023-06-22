@@ -33,6 +33,8 @@ public class MenuScreenUI : MonoBehaviour
           OffControlsPanel();
 
           GameManager.Instance.GameStart();
+
+          AudioManager.Instance.PlaySound2D("ButtonPressed");
      }
 
      public void OnToggleControls()
@@ -48,6 +50,8 @@ public class MenuScreenUI : MonoBehaviour
                     ShowControlsPanel();
                }
           }
+
+          AudioManager.Instance.PlaySound2D("ButtonPressed");
      }
 
      public void OffControlsPanel()

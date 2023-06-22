@@ -21,6 +21,7 @@ public class MeleeWeapon : MonoBehaviour
           if (collision.transform.TryGetComponent(out IDamageable targetHit))
           {
                targetHit.TakeHit(5);
+               AudioManager.Instance.PlaySound2D("AttackMelee");
           }
      }
 }

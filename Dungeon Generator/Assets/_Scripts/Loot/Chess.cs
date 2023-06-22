@@ -60,6 +60,8 @@ public class Chess : MonoBehaviour, IInteractable
           if (!open)
           {
                Open();
+
+               AudioManager.Instance.PlaySound2D("InteractChest");
           }
      }
 

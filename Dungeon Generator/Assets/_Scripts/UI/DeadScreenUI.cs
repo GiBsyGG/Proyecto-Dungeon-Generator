@@ -28,6 +28,8 @@ public class DeadScreenUI : MonoBehaviour
           // Para evitar mas interacciones con el boton, en este caso es mejor no desactivarlo
           //_backToMenuButton.interactable = false;
 
+          AudioManager.Instance.PlaySound2D("ButtonPressed");
+
           GameManager.Instance.BackToMenu();
      }
 

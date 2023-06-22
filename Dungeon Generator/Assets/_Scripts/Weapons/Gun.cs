@@ -59,20 +59,32 @@ public class Gun : MonoBehaviour
         
         for (int i =0; i < _projectileSpawn.Length; i++){
 
-        nextShotTime = Time.time + _msBetweenShots / 1000;
-        GameObject newProjectile = Instantiate(_projectile, _projectileSpawn[i].position, _projectileSpawn[i].rotation);  
-          newProjectile.TryGetComponent<Bullet>(out Bullet bullet);
-          if (bullet != null){
-               bullet.SetSpeed(_muzzleVelocity);
-          }  
+             nextShotTime = Time.time + _msBetweenShots / 1000;
+             GameObject newProjectile = Instantiate(_projectile, _projectileSpawn[i].position, _projectileSpawn[i].rotation);  
+               newProjectile.TryGetComponent<Bullet>(out Bullet bullet);
+               if (bullet != null){
+                    bullet.SetSpeed(_muzzleVelocity);
+               }
+               switch (type)
+               {
+                    case GunType.ShotGun:
+                         AudioManager.Instance.PlaySound2D("AttackShotgun");
+                         break;
+                    case GunType.Pistol:
+                         AudioManager.Instance.PlaySound2D("AttackPistol");
+                         break;
+                    case GunType.MachineGun:
+                         AudioManager.Instance.PlaySound2D("AttackMachinegun");
+                         break;
+               }
 
-        }
+            }
         }
     }
 
     public void OnTriggerHold() {
       Shoot();
-      triggerRelaesedSinceLastShot = false; 
+      triggerRelaesedSinceLastShot = false;           
     }
 
     public void OnTriggerrRelease() {

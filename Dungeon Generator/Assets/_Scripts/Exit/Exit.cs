@@ -24,12 +24,16 @@ public class Exit : MonoBehaviour, IInteractable
                // Comprobamos que se tenga la llave
                if (GameManager.Instance.player.HaveKey)
                {
+                    AudioManager.Instance.PlaySound2D("InteractOpenDoor");
+
                     StartCoroutine(OpenHatchway());
                     // Indicamos que ya se interactuo con ella
                     isUsed = true;
                }
                else
                {
+                    AudioManager.Instance.PlaySound2D("InteractCloseDoor");
+
                     GameEvents.OnActiveMessageEvent?.Invoke(MessageType.NoKey);
                }
                

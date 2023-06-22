@@ -51,6 +51,8 @@ public class PlayerLoot : MonoBehaviour
 
           // Llamar al evento de la actualizar la vida
           GameEvents.OnPlayerHealthChangeEvent?.Invoke(_player.HealthPoints);
+
+          AudioManager.Instance.PlaySound2D("PlayerHealed");
      }
 
      public void ChangeGun(Gun.GunType gunType)
@@ -58,6 +60,8 @@ public class PlayerLoot : MonoBehaviour
           if(_gunController != null)
           {
                _gunController.EquipLoot(gunType);
+
+               AudioManager.Instance.PlaySound2D("InteractWeaponLoot");
           }
      }
 
@@ -69,6 +73,8 @@ public class PlayerLoot : MonoBehaviour
 
                // Comunicamos que obtuvo la llave
                GameEvents.OnPlayerKeyChangeEvent?.Invoke(_player.HaveKey);
+
+               AudioManager.Instance.PlaySound2D("InteractKeyLoot");
           }
      }
 }

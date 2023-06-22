@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public enum GameState { InGame, InMenu, InDead};
+public enum GameState { InGame, InMenu, InDead, InLoad};
 
 public class GameManager : MonoBehaviour
 {
@@ -80,6 +80,8 @@ public class GameManager : MonoBehaviour
           Cursor.visible = true;
           deadScreen.SetActive(true);
           GameEvents.OnPlayerDeathEvent?.Invoke(Instance.dungeonLevel);
+
+          AudioManager.Instance.PlaySound2D("PlayerDead");
      }
 
      void HandleMenu()
@@ -126,8 +128,12 @@ public class GameManager : MonoBehaviour
           //SceneManager.LoadScene("NextDungeon");
           nextDungeonScreen.SetActive(true);
 
+          gameState = GameState.InLoad;
+
           // Comunicar que se comenzó una mazmorra
           GameEvents.OnChangeDungeonEvent?.Invoke(Instance.dungeonLevel);
+
+          AudioManager.Instance.PlaySound2D("LoadScreen");
 
           StartCoroutine(LoadNewDungeon());
      }

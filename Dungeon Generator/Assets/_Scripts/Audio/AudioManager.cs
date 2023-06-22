@@ -157,6 +157,9 @@ public class AudioManager : MonoBehaviour
      {
           AudioLibrary library = Resources.Load<AudioLibrary>("Scriptables/Audio/Library");
 
+          if (library == null)
+               Debug.Log("no se encuentra");
+
           foreach (AudioMusicClip music in library.music)
           {
                if (!_musicGroup.ContainsKey(music.MusicType))

@@ -80,6 +80,8 @@ public class AttackActions : MonoBehaviour
           float elapsedTime = 0f;
           float rotationTime = 0.3f; // Duracion de la rotacion
 
+          AudioManager.Instance.PlaySound2D("NoHitMelee");
+
           // Animaci�n de ataque a melee
           while (elapsedTime < rotationTime)
           {
