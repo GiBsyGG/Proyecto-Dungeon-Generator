@@ -12,7 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 230e181c6f7b66c45902e7753aa26ee5, type: 3}
   m_Name: Library
   m_EditorClassIdentifier: 
-  music: []
+  music:
+  - MusicType: 0
+    Clip: {fileID: 8300000, guid: afd9084b46592e04fa9ff3e8bc27012f, type: 3}
+  - MusicType: 1
+    Clip: {fileID: 8300000, guid: 7664e6855fe301146b38602f88bc08bb, type: 3}
   soundGroups:
   - groupID: PlayerDamaged
     clips:

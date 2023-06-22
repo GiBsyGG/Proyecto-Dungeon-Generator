@@ -104,6 +104,8 @@ public class GameManager : MonoBehaviour
           Cursor.visible = true;
 
           GameEvents.OnBackToMenuEvent?.Invoke();
+          
+          AudioManager.Instance.PlayMusic(AudioMusicType.Menu);
 
      }
 
@@ -119,6 +121,8 @@ public class GameManager : MonoBehaviour
 
           // Desactivar el cursor
           Cursor.visible = false;
+
+          AudioManager.Instance.PlayMusic(AudioMusicType.Gameplay);
      }
 
      void HandleNextDungeon()
