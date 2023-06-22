@@ -1,18 +1,26 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
-public class AudioLibrary : MonoBehaviour
+[CreateAssetMenu(menuName = "Audio/AudioLibrary")]
+public class AudioLibrary : ScriptableObject
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+     public AudioMusicClip[] music;
+     public AudioSoundGroup[] soundGroups;
+}
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
+public enum AudioMusicType { Menu, Gameplay, End }
+
+[Serializable]
+public class AudioMusicClip
+{
+     public AudioMusicType MusicType;
+     public AudioClip Clip;
+}
+
+[Serializable]
+public class AudioSoundGroup
+{
+     public string groupID;
+     public AudioClip[] clips;
 }
