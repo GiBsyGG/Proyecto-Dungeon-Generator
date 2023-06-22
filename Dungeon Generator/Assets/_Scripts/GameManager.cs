@@ -47,7 +47,7 @@ public class GameManager : MonoBehaviour
      {
           // Bajamos el volumen de los efectos
           AudioManager.Instance.SetVolume(0.05f, AudioChannel.Sfx);
-
+          AudioManager.Instance.SetVolume(1f, AudioChannel.Music);
           HandleMenu();
      }
 
