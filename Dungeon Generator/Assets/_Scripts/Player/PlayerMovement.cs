@@ -139,7 +139,7 @@ public class PlayerMovement : MonoBehaviour
 
           while (true)
           {
-               yield return new WaitForSeconds(0.25f);
+               yield return new WaitForSeconds(0.20f);
                break;
           }
           _stepsSound = false;
