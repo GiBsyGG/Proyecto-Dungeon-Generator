@@ -9,9 +9,12 @@ public class MenuScreenUI : MonoBehaviour
      [SerializeField]
      private Button[] _startButton;
      [SerializeField]
+     private Button[] _quitButton;
+     [SerializeField]
      private Button[] _controlsButton;
      [SerializeField]
      private GameObject[] _controlsPanel;
+     
 
      private bool _controlsOnScreen = false;
 
@@ -22,6 +25,7 @@ public class MenuScreenUI : MonoBehaviour
                _controlsPanel[i].SetActive(false);
                _startButton[i].onClick.AddListener(OnStartButtonClicked);
                _controlsButton[i].onClick.AddListener(OnToggleControls);
+               _quitButton[i].onClick.AddListener(ExitGame);
           }
      }
 
@@ -71,5 +75,10 @@ public class MenuScreenUI : MonoBehaviour
                _controlsPanel[i].SetActive(true);
                _controlsOnScreen = true;
           }
+     }
+
+     public void ExitGame()
+     {
+          Application.Quit();
      }
 }
