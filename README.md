@@ -16,8 +16,6 @@ variación en los niveles y el objetivo es llegar lo más lejos que se pueda en 
 ### Trailer Demo
 [![Trailer Demo](https://res.cloudinary.com/dxg0iv6ao/image/upload/v1687578413/Videojuegos/ldgch15w2ih3t5bayb8h.png)](https://youtu.be/sx89vlN_xa8)
 
-[![Trailer Demo](https://i.ytimg.com/an_webp/sx89vlN_xa8/mqdefault_6s.webp?du=3000&sqp=CNWq2aQG&rs=AOn4CLA0ovgSsmuRuu729uSwWs-sfsSRlQ)](https://youtu.be/sx89vlN_xa8)
-
 ## Versión de Unity
 **2021.3.18f1**
 
